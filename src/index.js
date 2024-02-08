@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import Summoner from './components/Summoner';
 import Ak from './components/Ak';
 import RiotAPISearch from './components/search/RiotAPISearch';
+import Login from './components/login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RiotAPISearch />
+    <Login />
   </React.StrictMode>
 );
 
