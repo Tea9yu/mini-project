@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Summoner from './components/Summoner';
+import Ak from './components/Ak';
+import RiotAPISearch from './components/search/RiotAPISearch';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RiotAPISearch />
   </React.StrictMode>
 );
 
