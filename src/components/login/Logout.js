@@ -1,31 +1,28 @@
-
+import { Link } from "react-router-dom";
 
 export default function Logout({ user, onLogout }) {
 
     return (
-        <section>
-            <div>
+        <div>
+            <section>
                 <div>
                     <div>
                         <div>
+                            <h1>
+                                안녕하세요!
+                            </h1>
                             <form>
                                 <div>
                                     {user}님 반갑습니다.
                                 </div>
-                                <div>
-                                    <input
-                                        type="button"
-                                        value="Sign out"
-                                        className="w-full rounded-md border"
-                                        onClick={onLogout}
-                                    />
-                                </div>
+                                <Link to='/' onClick={onLogout} >로그아웃</Link>
                             </form>
+
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     )
 
 
