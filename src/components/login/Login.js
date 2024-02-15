@@ -1,44 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import LoginForm from './LoginForm';
-import Logout from './Logout';
-import { useRecoilState } from 'recoil';
-import { stLogin } from './StAtom';
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
+import Logout from "./Logout";
 
 export default function Login() {
-    const [user, setUser] = useState(null);
-    const [isLogin, setIsLogin] = useRecoilState(stLogin) ;
+  const [user, setUser] = useState();
 
-    const handleLogin = (username) => {
-        localStorage.setItem('user', username);
-        setUser(username);
-        setIsLogin(true);
-    }
+  const handleLogin = (username) => {
+    localStorage.setItem("user", username);
+    setUser(username);
+  };
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-        setIsLogin(false);
-    }
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
 
-    useEffect(() => {
-        const lsUser = localStorage.getItem('user');
-        if (lsUser) {
-            setUser(lsUser);
-            setIsLogin(true)
-        }
-        else {
-            setIsLogin(false);
-        }
-    }, []);
-    return (
-        <main>
-            <div>
-                {/* {isLogin ? <Logout /> : <LoginForm />} */}
-                {user ? <Logout user={user} onLogout={handleLogout} />
-                      : <LoginForm onLogin={handleLogin} />}
-                {/* {<LoginForm />}
-                {<Logout />} */}
-            </div>
-        </main>
-    )
+  return (
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      {user ? (
+        <Logout onLogout={handleLogout} />
+      ) : (
+        <LoginForm onLogin={handleLogin} />
+      )}
+    </div>
+  );
 }

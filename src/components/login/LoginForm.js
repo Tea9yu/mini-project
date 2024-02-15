@@ -1,62 +1,49 @@
-import { useRef } from "react"
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function LoginForm({ onLogin }) {
-    const userIdRef = useRef();
-    const userPwRef = useRef();
-    
-    const handleLogin = (e) => {
-        const userId = userIdRef.current.value;
-        const userPw = userPwRef.current.value;
+  const userIdRef = useRef();
+  const userPwRef = useRef();
 
-        e.preventDefault(); // 기본 폼 제출 동작 방지
-        if (userId === "user" && userPw === 'pw1234') {
-            setLoginState(true);
-            onLogin(userId.current.value);
-            alert("로그인 성공");
-        }
-        else {
-            alert("로그인 실패");
-        }
+  const handleLogin = () => {
+    const userId = userIdRef.current.value;
+    const userPw = userPwRef.current.value;
+
+    // 예시로 userId가 "user"이고 userPw가 "pw1234"일 때 로그인 성공
+    if (userId === "user" && userPw === "pw1234") {
+      onLogin(userId);
+    } else {
+      alert("로그인 실패");
     }
-    return (
+
+    console.log(userId);
+    console.log(userPw)
+  };
+
+  return (
+    <div>
+      <h1>로그인 하세요.</h1>
+      <form>
         <div>
-            <section>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <h1>
-                                    로그인 하세요.
-                                </h1>
-                                <form onSubmit={handleLogin}>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            ref={userIdRef}
-                                            id="userId"
-                                            placeholder="아이디를 입력하세요"
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            ref={userPwRef}
-                                            id="userPw"
-                                            placeholder="비밀번호를 입력하세요"
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="submit"
-                                            value="로그인"                                            
-                                        />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          <input className="border"
+            type="text"
+            ref={userIdRef}
+            id="userId"
+            placeholder="아이디를 입력하세요"
+          />
         </div>
-    )
+        <div>
+          <input className="border"
+            type="password"
+            ref={userPwRef}
+            id="userPw"
+            placeholder="비밀번호를 입력하세요"
+          />
+        </div>
+        <div>
+          <button className="border " type="button" value="로그인" onClick={handleLogin}>로그인</button> 
+        </div>
+      </form>
+    </div>
+  );
 }
