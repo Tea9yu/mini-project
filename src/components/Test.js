@@ -5,9 +5,9 @@ export default function Test() {
     const [dt, setDt] = useState();
 
     const getData = async () => {
-        fetch('http://10.125.121.201/board')
+        fetch('http://10.125.121.170:8080/board')
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(data => console.log(data))
             .catch(error => console.log(error));
     }
 

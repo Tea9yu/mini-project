@@ -6,9 +6,6 @@ export default function Main() {
   return (
     <div className='flex flex-col justify-center items-center'>
       <div className='flex lg:flex-grow gap-36 my-2'>
-      <h1>홈</h1>
-      <h1>랭킹</h1>
-      <h1>게시판</h1>
       </div>      
         <div className="flex flex-col justify-center items-center w-full h-full">
           <div className='flex flex-col justify-center items-center'>
@@ -26,7 +23,7 @@ export default function Main() {
               <section className='text-xl'>랭킹</section>
             </div>
           </div>
-        </div>      
+        </div>
     </div>
   )
 }

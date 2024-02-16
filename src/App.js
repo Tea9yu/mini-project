@@ -6,13 +6,16 @@ import Logout from './components/login/Logout';
 import LoginForm from './components/login/LoginForm';
 import RiotAPISearch from './components/search/RiotAPISearch';
 import Main from './components/main/Main';
-import { useState, useEffect } from 'react';
+import BoardList from './components/board/BoardList';
+import BoardView from './components/board/BoardView';
+import { useState, useEffect } from 'react'; 
+import Nav from './UI/Nav';
 
 function App() {
   const [dt, setDt] = useState();
 
   const getData = async () => {
-      fetch('http://10.125.121.170:8080/board')
+      fetch(`http://10.125.121.170:8080/board/1`)
           .then(response => response.json())
           .then(json => console.log(json))
           .catch(error => console.log(error));
@@ -24,9 +27,25 @@ function App() {
   });
 
 return (
-  <div>
-    test
-  </div>
+ <BrowserRouter>
+      <RecoilRoot>
+        <div>
+          <div>
+            <Nav />
+          </div>
+        </div>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/search' element={<RiotAPISearch />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/loginform' element={<LoginForm />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/list' element={<BoardList />} />
+            <Route path='/view' element={<BoardView />} />
+          </Routes>
+      </RecoilRoot>
+    </BrowserRouter>
+
 )
   // return (
 //     <div className="App">
