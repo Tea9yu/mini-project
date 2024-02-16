@@ -8,13 +8,13 @@ export default function BoardList() {
 
     
     const getBoardList = async () => {
-        // const resp = await axios.get('http://10.125.121.170:8080/board').data; // 2) 게시글 목록 데이터에 할당  
-        // setBoardList(resp.data); // 3) boardList 변수에 할당
-        // console.log(boardList);
-        fetch(`http://10.125.121.170:8080/board`)
-          .then(response => response.json())
-          .then(json => setBoardList(json))
-          .catch(error => console.log(error));        
+        const resp = await axios.get(`http://10.125.121.170:8080/board`, {}); // 2) 게시글 목록 데이터에 할당  
+        setBoardList(resp.data); // 3) boardList 변수에 할당
+        console.log(boardList);
+        // fetch(`http://10.125.121.170:8080/board`)
+        //   .then(response => response.json())
+        //   .then(json => setBoardList(json))
+        //   .catch(error => console.log(error));        
 
     }
 

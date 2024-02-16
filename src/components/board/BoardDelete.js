@@ -1,17 +1,34 @@
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 
-// export default function BoardDelete() {
+export default function BoardDelete() {
 
-//   const getBoardView = async () => {
+  const Board = ({ seq, title, writer, content }) => {
+    const navigate = useNavigate();
     
-//     fetch(`http://10.125.121.170:8080/boardDel/${seq}`)
-//       .then(response => response.json())
-//       .then(json => setBoardList(json))
-//       .catch(error => console.log(error));
-// }
-//   return (
-//     <div>
-//       게시글 삭제
-//     </div>
-//   )
-// }
+  }
+
+  const deleteBoard = async () => {
+    if (window.confirm('게시글을 삭제하시겠습니다?')) {
+    await axios.delete(`http://10.125.121.170:8080/boardDel/${seq}`)
+      .then((resp) => {
+        alert('삭제되었습니다.');
+        Navigate('/board');
+      })
+    }
+};
+
+const moveToList = () => {
+  Navigate('board');
+}
+  return (
+    <div>
+      <h2>{seq}</h2>
+      <h2>{title}</h2>
+      <h5>{writer}</h5>
+      <hr />
+      <p>{content}</p>
+    </div>
+  )
+}
