@@ -8,6 +8,7 @@ import RiotAPISearch from './components/search/RiotAPISearch';
 import Main from './components/main/Main';
 import BoardList from './components/board/BoardList';
 import BoardView from './components/board/BoardView';
+import BoardWrite from './components/board/BoardWrite';
 import { useState, useEffect } from 'react'; 
 import Nav from './UI/Nav';
 
@@ -22,7 +23,7 @@ function App() {
   }
 
   useEffect(() => {
-      console.log('useeffect');
+      console.log('useEffect');
       getData();
   });
 
@@ -41,7 +42,8 @@ return (
             <Route path='/loginform' element={<LoginForm />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/list' element={<BoardList />} />
-            <Route path='/view' element={<BoardView />} />
+            <Route path='/view/:seq' element={<BoardView />} />
+            <Route path='/write' element={<BoardWrite />} />
           </Routes>
       </RecoilRoot>
     </BrowserRouter>

@@ -1,26 +1,44 @@
 import { useState,useEffect } from "react";
 import Board from "./Board";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 
 export default function BoardView() {
-  const [boardList, setBoardList] = useState([]);
-  const seq = 1;
+  // const [boardList, setBoardList] = useState([]);
+  let seq = useParams().seq;
 
-  const getBoardList = async () => {
-    const resp = await axios.delete(`http://10.125.121.170:8080/board/${seq}`); // 2) 게시글 목록 데이터에 할당  
-    setBoardList(resp.data); // 3) boardList 변수에 할당
-    console.log(boardList);
+  const navigate = useNavigate();
+  // const [view, setView] = useState([]);
+  const [board, setBoard] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  // board 가져오기
+  const getBoard = async () => {
+    const resp = await axios.get(`http://10.125.121.170:8080/board/${seq}`); // 2) 게시글 목록 데이터에 할당  
+    
+    setBoard(resp.data); 
+    setLoading(false);
+    console.log(board);
   }
 
   useEffect(() => {
-    getBoardList(); // 1) 게시글 목록 조회 함수 호출
+    getBoard(); // 1) 게시글 목록 조회 함수 호출
   }, []);
 
   return (
     <div>
       게시판 목록 출력
+      {loading ? (
+        <h2>loading...</h2>
+      ) : (
+        <Board
+          seq={board.content.seq}
+          title={board.content.title}
+          writer={board.content.writer}
+          content={board.content.content}
+        />
+      )}
     </div>
   );
 };
@@ -72,5 +90,5 @@ export default function BoardView() {
 //       <h1>게시판 상세 보기</h1>
 //       <BoardView boardView={boardView} />
 //     </div>
-  // )
+//   )
 // }

@@ -49,6 +49,7 @@ const RiotAPISearch = () => {
       const response = await axios.get(url);
       console.log("소환사API호출")
       console.log(response);
+      console.log(response.data.name);
 
       if (!response.data) {
         alert("소환사 정보를 찾을 수 없습니다.");

@@ -6,35 +6,38 @@ export default function BoardList() {
     const [boardList, setBoardList] = useState([]);
     const [boardTag, setBoardTag] = useState([]);
 
-    
+
     const getBoardList = async () => {
-        const resp = await axios.get(`http://10.125.121.170:8080/board`, {}); // 2) 게시글 목록 데이터에 할당  
-        setBoardList(resp.data); // 3) boardList 변수에 할당
+        const resp = await axios.get(`http://10.125.121.170:8080/board`); // 2) 게시글 목록 데이터에 할당  
+        setBoardList(resp.data.content); // 3) boardList 변수에 할당
         console.log(boardList);
         // fetch(`http://10.125.121.170:8080/board`)
         //   .then(response => response.json())
         //   .then(json => setBoardList(json))
-        //   .catch(error => console.log(error));        
+        //   .catch(error => console.log(error));
+
+        const pngn = resp.pagination;
+        console.log(pngn);
 
     }
 
-    
-    
+
+
     useEffect(() => {
         getBoardList(); // 1) 게시글 목록 조회 함수 호출
     }, []);
 
     useEffect(() => {
-        console.log(boardList);
-        
-        let tag = boardList.map((item) =>                     
-                    <tr className="flex justify-center items-center w-full h-full border">
-                        <Link to='/View' className="flex border justify-center items-center w-1/3 h-full">{item.seq}</Link>
-                        <Link to='/View' className="flex border justify-center items-center w-full h-full">{item.title}</Link>
-                        <td className="flex border justify-center items-center w-1/2 h-full">{item.writer}</td>
-                        <td className="flex border justify-center items-center w-1/3 h-full">{item.cnt}</td>
-                        <td className="flex border justify-center items-center w-1/2 h-full">{item.createDate}</td>
-                    </tr>                           
+        console.log(boardList.content);
+
+        let tag = boardList.map((item) =>
+            <tr className="flex justify-center items-center w-full h-full border">
+                <Link to={`/view/${item.seq}`} className="flex border justify-center items-center w-1/3 h-full">{item.seq}</Link>
+                <Link to={`/view/${item.seq}`} className="flex border justify-center items-center w-full h-full">{item.title}</Link>
+                <td className="flex border justify-center items-center w-1/2 h-full">{item.writer}</td>
+                <td className="flex border justify-center items-center w-1/3 h-full">{item.cnt}</td>
+                <td className="flex border justify-center items-center w-1/2 h-full">{item.createDate}</td>
+            </tr>
         )
         setBoardTag(tag);
         console.log(tag);
@@ -43,37 +46,45 @@ export default function BoardList() {
     return (
         <div>
             <h1 className="flex flex-col justify-center items-center w-full h-full">게시판 목록</h1>
-                <form>
-                    <table className="flex flex-col justify-center items-center border">
-                        <tr className="flex flex-col items-center justify-center w-full h-full">
-                            <td className="flex gap-2 justify-center items-center w-full h-full">
-                                <select name="searchField">
-                                    <option value="title">제목</option>
-                                    <option value="content">내용</option>
-                                </select>
-                                <input className="border" type="text" name="searchWord" />
-                                <input className="border" type="submit" value="검색하기" />
-                            </td>
-                        </tr>
-                    </table>
-                </form> 
-                <table className="flex flex-col justify-center items-center border w-full h-full">
-                    <tr className="flex justify-center items-center border w-full h-full">
-                        <th className="flex border justify-center items-center w-1/3 h-full">번호</th>
-                        <th className="flex border justify-center items-center w-full h-full">제목</th>
-                        <th className="flex border justify-center items-center w-1/2 h-full">작성자</th>
-                        <th className="flex border justify-center items-center w-1/3 h-full">조회수</th>
-                        <th className="flex border justify-center items-center w-1/2 h-full">작성일</th>
-                    </tr>                    
-                        {boardTag}                    
-                </table>
-                <table className="border w-full h-full">
-                    <tr>
-                        <td>
-                            <button className="border" type="submit" value="글쓰기">글쓰기</button>
+            <form>
+                <table className="flex flex-col justify-center items-center border">
+                    <tr className="flex flex-col items-center justify-center w-full h-full">
+                        <td className="flex gap-2 justify-center items-center w-full h-full">
+                            <select name="searchField">
+                                <option value="title">제목</option>
+                                <option value="content">내용</option>
+                            </select>
+                            <input className="border" type="text" name="searchWord" />
+                            <input className="border" type="submit" value="검색하기" />
                         </td>
                     </tr>
-                </table>            
+                </table>
+            </form>
+            <table className="table-auto flex flex-col justify-center items-center border w-full h-full">
+                <tr className="flex justify-center items-center border w-full h-full">
+                    <th className="flex border justify-center items-center w-1/3 h-full">번호</th>
+                    <th className="flex border justify-center items-center w-full h-full">제목</th>
+                    <th className="flex border justify-center items-center w-1/2 h-full">작성자</th>
+                    <th className="flex border justify-center items-center w-1/3 h-full">조회수</th>
+                    <th className="flex border justify-center items-center w-1/2 h-full">작성일</th>
+                </tr>
+                {boardTag}
+            </table>
+            <table className="border w-full h-full">
+                <tr>
+                    <td>
+                        <button className="border rounded-lg" type="submit" value="글쓰기">글쓰기</button>
+                    </td>
+                </tr>
+            </table>
+            {/* <ul>
+                {boardList.map((board) => (
+                    // 4) map 함수로 데이터 출력
+                    <li key={board.idx}>
+                        <Link to={`/board/${board.seq}`}>{board.title}</Link>
+                    </li>
+                ))}
+            </ul> */}
         </div>
     )
 }
