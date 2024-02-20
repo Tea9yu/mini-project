@@ -7,28 +7,30 @@ export default function BoardList() {
     const [boardTag, setBoardTag] = useState([]);
 
 
-    const getBoardList = async () => {
-        const resp = await axios.get(`http://10.125.121.170:8080/board`); // 2) 게시글 목록 데이터에 할당  
+    const getBoardList = async (pgno) => {
+        const resp = await axios.get(`http://10.125.121.170:8080/board?pageNo=${pgno}`); // 2) 게시글 목록 데이터에 할당  
         setBoardList(resp.data.content); // 3) boardList 변수에 할당
-        console.log(boardList);
+        console.log("resp", resp.data.content);
+        console.log("boardList", boardList);
         // fetch(`http://10.125.121.170:8080/board`)
         //   .then(response => response.json())
         //   .then(json => setBoardList(json))
         //   .catch(error => console.log(error));
 
-        const pngn = resp.pagination;
-        console.log(pngn);
+        // const pngn = resp.pagination;
+        // console.log("pngn", pngn);
 
     }
 
 
 
     useEffect(() => {
-        getBoardList(); // 1) 게시글 목록 조회 함수 호출
+        let n= 1
+        getBoardList(n); // 1) 게시글 목록 조회 함수 호출
     }, []);
 
     useEffect(() => {
-        console.log(boardList.content);
+        console.log("useEffect", boardList);
 
         let tag = boardList.map((item) =>
             <tr className="flex justify-center items-center w-full h-full border">
@@ -40,7 +42,7 @@ export default function BoardList() {
             </tr>
         )
         setBoardTag(tag);
-        console.log(tag);
+        // console.log("tag", tag);
 
     }, [boardList]);
     return (
@@ -71,11 +73,11 @@ export default function BoardList() {
                 {boardTag}
             </table>
             <table className="border w-full h-full">
-                <tr>
-                    <td>
-                        <button className="border rounded-lg" type="submit" value="글쓰기">글쓰기</button>
-                    </td>
-                </tr>
+                <div>
+                    <div>
+                        <Link to={`/write`}><button className="border rounded-lg" type="submit" value="글쓰기">글쓰기</button></Link>
+                    </div>
+                </div>
             </table>
             {/* <ul>
                 {boardList.map((board) => (

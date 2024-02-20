@@ -8,7 +8,7 @@ import BoardWrite from './components/board/BoardWrite';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <BoardWrite />
+    <App />
   // </React.StrictMode>
 );
 

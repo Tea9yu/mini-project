@@ -15,17 +15,7 @@ import Nav from './UI/Nav';
 function App() {
   const [dt, setDt] = useState();
 
-  const getData = async () => {
-      fetch(`http://10.125.121.170:8080/board/1`)
-          .then(response => response.json())
-          .then(json => console.log(json))
-          .catch(error => console.log(error));
-  }
-
-  useEffect(() => {
-      console.log('useEffect');
-      getData();
-  });
+  
 
 return (
  <BrowserRouter>
