@@ -56,7 +56,7 @@ export default function BoardView() {
       return;
     }
 
-    const updateData = {      
+    const updateData = {
       title: updateTitle.current.value,
       content: updateContent.current.value,
       writer: updateWriter.current.value

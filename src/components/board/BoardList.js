@@ -25,7 +25,7 @@ export default function BoardList() {
 
 
     useEffect(() => {
-        let n= 1
+        let n= 7
         getBoardList(n); // 1) 게시글 목록 조회 함수 호출
     }, []);
 

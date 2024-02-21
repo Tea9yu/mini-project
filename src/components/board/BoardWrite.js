@@ -16,15 +16,13 @@ export default function BoardWrite() {
       alert("제목, 내용, 작성자를 입력하세요");
       return;
     }
-
-    const postData = {
-      title: title.current.value,
-      content: content.current.value,
-      writer: writer.current.value
-    }
-
+    
     if (window.confirm("게시글을 등록하시겠습니까?")) {
-      axios.post(`http://10.125.121.170:8080/board`, postData,
+      axios.post(`http://10.125.121.170:8080/board`,  {
+        title: title.current.value,
+        content: content.current.value,
+        writer: writer.current.value
+      },
         {
           headers: {
             "Content-type": `application/json`
