@@ -52,17 +52,16 @@ export default function BoardView() {
   // 게시글 수정하기
   const handleUpdate = () => {
     if (updateTitle.current.value === "" || updateContent.current.value === "" || updateWriter.current.value === "") {
-      alert("수정할 항목에 입력해주세요");
+      alert("수정할 항목을 입력해주세요");
       return;
     }
-
-    const updateData = {
-      title: updateTitle.current.value,
-      content: updateContent.current.value,
-      writer: updateWriter.current.value
-    }
+    
     if (window.confirm("수정하시겠습니까?")) {
-      axios.put(`http://10.125.121.170:8080/board/${seq}`, updateData, {
+      axios.put(`http://10.125.121.170:8080/board/${seq}`, {
+        title: updateTitle.current.value,
+        content: updateContent.current.value,
+        writer: updateWriter.current.value
+      }, {
         headers: {
           "Content-type": `application/json`
         }
