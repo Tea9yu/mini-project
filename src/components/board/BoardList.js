@@ -54,7 +54,7 @@ export default function BoardList() {
                         <td className="flex gap-2 justify-center items-center w-full h-full">
                             <select name="searchField">
                                 <option value="title">제목</option>
-                                <option value="content">내용</option>
+                                <option value="content">작성자</option>
                             </select>
                             <input className="border" type="text" name="searchWord" />
                             <input className="border" type="submit" value="검색하기" />

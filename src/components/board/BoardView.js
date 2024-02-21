@@ -12,6 +12,7 @@ export default function BoardView() {
   const updateTitle = useRef();
   const updateContent = useRef();
   const updateWriter = useRef();
+  const updateSeq = useRef();
 
 
   const [boardView, setBoardView] = useState([]);
@@ -50,24 +51,28 @@ export default function BoardView() {
 
   // 게시글 수정하기
   const handleUpdate = () => {
-    if (updateTitle.current.value === "" || updateContent.current.value === "") {
+    if (updateTitle.current.value === "" || updateContent.current.value === "" || updateWriter.current.value === "") {
       alert("수정할 항목에 입력해주세요");
       return;
     }
 
-    const updateData = {
-      title: boardView.title,
-      content: boardView.content,
-      writer: boardView.writer
+    const updateData = {      
+      title: updateTitle.current.value,
+      content: updateContent.current.value,
+      writer: updateWriter.current.value
     }
     if (window.confirm("수정하시겠습니까?")) {
-      axios.put(`http://10.125.121.170:8080/board/${seq}`, updateData, {})
+      axios.put(`http://10.125.121.170:8080/board/${seq}`, updateData, {
+        headers: {
+          "Content-type": `application/json`
+        }
+      })
       .then(resp => {
-        alert("수정되었습니다.")
+        alert("수정되었습니다.");
         navigate(`/view/${seq}`);
       })
       .catch(err => {
-        console(err);
+        console.log(err);
         alert("게시글 수정 실패");
       });
     }
@@ -162,7 +167,7 @@ export default function BoardView() {
             <tr>
               <div className="w-full h-full">
                 <div className="flex 1 0 auto">
-                  <div className="border flex justify-center items-center w-20">번호</div>
+                  <div className="border flex justify-center items-center w-20" ref={updateSeq} name="seq" defaultValue={boardView.seq}>번호</div>
                   <div className="border flex justify-center items-center w-20">
                     {boardView.seq}
                   </div>
@@ -201,9 +206,9 @@ export default function BoardView() {
                 </div>
                 <div className="">
                   <div className="flex justify-center items-center mt-3">
-                    <Link><button className="bg-sky-400 rounded-lg text-white p-2" onClick={handleUpdate}>수정</button></Link>
+                    <Link><button className="bg-sky-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>수정</button></Link>
                     &nbsp;&nbsp; | &nbsp;&nbsp;
-                    <Link><button className="bg-sky-400 rounded-lg text-white p-2" onClick={handleDelete}>삭제</button></Link>
+                    <Link><button className="bg-sky-400 rounded-lg text-white p-2" type="button" onClick={handleDelete}>삭제</button></Link>
                     &nbsp;&nbsp; | &nbsp;&nbsp;
                     <Link to={`/list`}><button className="bg-sky-400 rounded-lg text-white p-2">목록</button></Link>
                   </div>
