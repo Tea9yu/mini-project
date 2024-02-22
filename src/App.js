@@ -5,12 +5,13 @@ import Login from './components/login/Login';
 import Logout from './components/login/Logout';
 import LoginForm from './components/login/LoginForm';
 import RiotAPISearch from './components/search/RiotAPISearch';
-import Main from './components/main/Main';
-import BoardList from './components/board/BoardList';
+import Main2 from './components/main/Main2';
+import BoardList2 from './components/board/BoardList2';
 import BoardView from './components/board/BoardView';
 import BoardWrite from './components/board/BoardWrite';
 import { useState, useEffect } from 'react'; 
 import Nav from './UI/Nav';
+import Comment from './components/board/Comment';
 
 function App() {
   const [dt, setDt] = useState();
@@ -26,14 +27,15 @@ return (
           </div>
         </div>
           <Routes>
-            <Route path='/' element={<Main />} />
+            <Route path='/' element={<Main2 />} />
             <Route path='/search' element={<RiotAPISearch />} />
             <Route path='/login' element={<Login />} />
             <Route path='/loginform' element={<LoginForm />} />
             <Route path='/logout' element={<Logout />} />
-            <Route path='/list' element={<BoardList />} />
+            <Route path='/list' element={<BoardList2 />} />
             <Route path='/view/:seq' element={<BoardView />} />
             <Route path='/write' element={<BoardWrite />} />
+            <Route path='/cmt' element={<Comment />} />
           </Routes>
       </RecoilRoot>
     </BrowserRouter>

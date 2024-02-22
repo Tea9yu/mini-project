@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 
@@ -18,6 +18,7 @@ const RiotAPISearch = () => {
     return korean.test(str);
   }
 
+  
 
   // handleSearch 내부에서 사용할 변수를 사위 스코프로 이동합니다.
   let summonerId
@@ -87,6 +88,7 @@ const RiotAPISearch = () => {
     }
   };
 
+  let matchArray = [];
   // 매치 API 불러오기
   const matchInfo = async () => {
     // const gameReset = document.querySelector(".games")
@@ -102,12 +104,12 @@ const RiotAPISearch = () => {
 
     // 매치 ID로 매치 검색 - API호출
       let gameAPI = []
-      for (let i = 0; i <= 19; i++) {
+      for (let i = 0; i <= 2; i++) {
         gameAPI.push(`https://asia.api.riotgames.com/lol/match/v5/matches/${games20.data[i]}?api_key=${apiKey}`)
       }
       
       // 20개 게임 데이터 
-      for (let k = 0; k <= 19; k++) {
+      for (let k = 0; k <= 2; k++) {
         let game = await axios.get(gameAPI[k])
 
         console.log(`<${k}, 번 째 게임>`)
@@ -122,7 +124,17 @@ const RiotAPISearch = () => {
             break
           }
         }
+
+        console.log("내 번호 :", myNumber)
+        console.log("게임 승,패 :", game.data.info.participants[myNumber]);
+        let tmp ={
+          win:game.data.info.participants[myNumber].win,
+          lose:game.data.info.participants[myNumber]
+        }
+        matchArray.push(tmp)
+        
       }
+
 
     } catch (error) {
       console.error("Error fetching match data:", error);
@@ -130,8 +142,8 @@ const RiotAPISearch = () => {
     }
 
   };
-
-
+  useEffect(()=>{console.log("mA",matchArray)},[matchArray])
+  
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
       <div className="flex justify-center items-center w-full h-full">
