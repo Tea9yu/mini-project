@@ -204,7 +204,7 @@ export default function BoardList() {
                 <div className="flex flex-col justify-center items-center pt-2">
                     <Pagination
                         activePage={page}   // 현재 페이지
-                        itemsCountPerPage={5}  // 한 페이지에 보여줄 아이템 갯수
+                        itemsCountPerPage={10}  // 한 페이지에 보여줄 아이템 갯수
                         totalItemsCount={totalNum}  // 총 아이템 갯수
                         pageRangeDisplayed={5}  // paginator의 페이지 범위
                         prevPageText={"‹"} // "이전"을 나타낼 텍스트

@@ -1,73 +1,132 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
-export default function Comment({seq}) {
-
-    // let seq = useParams().seq;
-    console.log("Comment", seq);
-    const [boardCmts, setBoardCmts] = useState([]);
-    const [reple, setReple] = useState([]);
-
-    // const getBoardCmts = async () => {
-    //     // const cmts = await axios.get(`http://10.125.121.170:8080/board/${seq}/comments`);
-    //     // setBoardCmts(cmts)
-    //     // console.log("cmt", cmts)
-    // }
-
-    // // useEffect(() => {
-    // //     // console.log("cmt", boardCmts)
-    // //     getBoardCmts();
-    // // }, []);
-
-    // useEffect(() => {
-    //     console.log("boardCmts", boardCmts)
-
-    //     let cmt = boardCmts.map((item) =>
-    //         <tr className="flex justify-center items-center w-full h-full border">
-    //             <td className="flex justify-center items-center w-1/2 h-full">{item.cmt_content}</td>
-    //             <td className="flex justify-center items-center w-1/3 h-full">{item.cmt_writer}</td>
-    //             <td className="flex justify-center items-center w-1/2 h-full">{item.createDate}</td>
-    //         </tr>
-    //     )
-    //     setReple(cmt);
-
-    // }, [boardCmts]);
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
+export default function Comment({ item }) {
 
+    const cmt_content = useRef();
+    const password = useRef();
+
+
+    const navigate = useNavigate();
+
+    const [isUpdate, setIsUpdate] = useState(false);
+
+    console.log("item=", item.cmt_id);
+
+    // 댓글 수정하기
+    const handleCmtUpdate = (e) => {
+        e.preventDefault();
+        if (cmt_content.current.value === "" || password.current.value === "") {
+            alert("수정할 항목을 입력해주세요");
+            return;
+        }
+
+        if (window.confirm("댓글을 수정하시겠습니까?")) {
+            axios.put(`http://10.125.121.170:8080/board/comments`, {
+                cmt_id: item.cmt_id,
+                cmt_content: cmt_content.current.value,
+                password: password.current.value
+            }, {
+                headers: {
+                    "Content-type": `application/json`
+                }
+            })
+                .then((res) => {
+                    alert("수정되었습니다.");
+                    setIsUpdate(false);
+                    window.location.reload();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert("댓글 수정 실패!");
+                });
+
+        }
+
+    }
+    const handleCmtClickEdit = (e) => {
+        e.preventDefault();
+        setIsUpdate(true);
+    }
+
+    // 댓글 삭제하기
+    const handleCmtDelete = (e) => {
+        e.preventDefault();
+        if (!isUpdate) {
+            setIsUpdate(true);
+            return;
+        }
+        console.log("pw",password.current.value);
+        console.log("ID",item.cmt_id);
+
+        if (password && password.current.value === "") {
+            alert("비밀번호를 입력해주세요");
+            return;
+        }
+        if (!password) {
+            alert("삭제 실패")
+            return
+        }
+        const inputs ={
+            cmt_id: item.cmt_id,                   
+            password: password.current.value,
+        }
+        if (window.confirm("삭제하시겠습니까?")) {
+            axios.delete(`http://10.125.121.170:8080/board/comments`,inputs
+                )
+                .then(resp => {
+                    console.log(inputs)
+                    alert("삭제되었습니다.");
+                    setIsUpdate(false);
+                    window.location.reload();
+                })
+                .catch((err) => {
+                    console.log(inputs)
+                    console.log(err)
+                    alert("삭제 실패!");
+                });
+
+        }
+    }
     return (
         <div>
-            {/* <div>
-                {reple}
+            <div className="flex flex-col w-full h-full border">
+                <div className="flex flex-row justify-between space-x-6 ">
+                    <div className="flex justify-center items-center h-full">{item.cmt_writer}</div>
+                    {isUpdate ?
+                        // 수정 가능속성
+                        <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
+                        //  수정 불가능 속성
+                        : <div>{''}</div>}
+                    <div className="flex justify-center items-center  h-full">{item.createDate}</div>
+                </div>
+                <div className="flex flex-row justify-between space-x-6 ">
+                    <div className="flex justify-center items-center  h-full">
+                        {isUpdate ?
+                            // 수정 가능속성
+                            <input className=" bg-green-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
+                            //  수정 불가능 속성
+                            : <div>{item.cmt_content}</div>}
+                    </div>
+
+                    <div>
+                        {isUpdate ?
+                            <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtUpdate}>등록</button>
+
+                            :
+                            <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtClickEdit}>수정</button>
+
+                        }
+                        <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtDelete}>삭제</button>
+                    </div>
+                </div>
             </div>
-            <form>
-                <div className='flex flex-col '>
-                    <div className='flex'>
-                        <input type="text" className="py-2 px-3 block w-1/5 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="작성자" />
-                        <input type="text" className="py-2 px-3 block w-1/5 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="비밀번호" />
-                        <button className='border'>등록</button>
-                        <button className='border'>수정</button>
-                        <button className='border'>삭제</button>
-                    </div>
-                </div>
-                <div>
-                    <input type="text" class="p-4 sm:p-5 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="댓글을 작성하세요" />
+            <div>
 
-                </div>
-            </form> */}
-            <div className="mt-10 mb-5">댓글</div>
-                    {reple}
+            </div>
 
-                    {/* 댓글작성 */}
-                    <div className="flex mt-10 ">
-                      <div className="ml-5">
-                        <input className="flex border justify-center items-center flex-grow" placeholder="  닉네임" type="text" name="reple" value={reple.cmt_content} />
-                        <input className="flex border justify-center items-center flex-grow" placeholder="  비밀번호" type="text" name="reple" value={reple.cmt_content} />
-                      </div>
-                      <input className="flex border justify-center items-center flex-grow" placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
-                      <button className="border border-green-900 bg-green-400 rounded-lg text-white ml-2 px-2 py-2">작성</button>
-                    </div>
         </div>
     )
 }

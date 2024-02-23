@@ -4,7 +4,7 @@ import axios from "axios";
 import TailCard from "../../UI/TailCard";
 import Pagination from "react-js-pagination";
 import TailSelect from "../../UI/TailSelect";
-
+import getFoodKr from "../data/getFoodKr.json";
 
 export default function BusanFoodInfo() {
     // 환경변수값 가져오기
@@ -15,14 +15,14 @@ export default function BusanFoodInfo() {
     const [totalNum, setTotalNum] = useState(0);
     const [gu, setGu] = useState('');
     const [selGuData, setSelGuData] = useState('');
-    const selSido = ["강서구", "금정구", "남구", "동래구", "부산진구", "북구", "사상구", "서구", "수영구", "연제구", "영도구", "해운대구"];
+    const selSido = ["강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"];
 
     // 화면 재 랜더링
     const [tags, setTags] = useState([]);
 
     const [selected, setSelected] = useState([]);
 
-    
+    console.log("data", getFoodKr);
 
     // 키워드 입력
     const kwInput = useRef();
@@ -52,6 +52,8 @@ export default function BusanFoodInfo() {
     const handlePageChange = (page) => {
       setPage(page);
   }
+  
+  // select박스가 선택이 되면
 const handleSelect = (e) => {
   console.log(e.target.value);
         let tm = tdata.filter(item => item.GUGUN_NM === e.target.value);
@@ -59,14 +61,13 @@ const handleSelect = (e) => {
         setSelGuData(tm);
 
 }
-    const getData = async(e) => {
-        
+    const getData = async(e) => {        
 
         // URL
         let url = `https://apis.data.go.kr/6260000/FoodService/getFoodKr?`;
         url = url + `serviceKey=${apikey}`;
         url = url + `&pageNo=${page}`;
-        url = url + `&numOfRows=50`;
+        url = url + `&numOfRows=10`;
         url = url + `&resultType=json`;
 
         console.log(url);
@@ -74,21 +75,23 @@ const handleSelect = (e) => {
         const resp = await axios.get(url)
         .then(res=>{
           // console.log("resp", res.data.getFoodKr.totalCount);
-          setTotalNum(res.data.getFoodKr.totalCount);
-          setTdata(res.data.getFoodKr.item)})
+          
+          setTdata(res.data.getFoodKr.item);
+          setTotalNum(res.data.getFoodKr.totalCount);})
         .catch(err =>{
           // alert("잠시 후 시도하세요")
           console.log(err)
         });
           
         // const data = await resp.data;     
-    }
-    
+    }    
 
+    // 컴포넌트 업데이트
     useEffect(() => {
       getData();
 
     },[page]);
+    
     // tdata 변경
     useEffect(()=>{
         if (tdata ==='') {
@@ -102,7 +105,8 @@ const handleSelect = (e) => {
         key={`card${idx}`}
         title={t.MAIN_TITLE}
         subtitle={t.ITEMCNTNTS}
-        tags={t.USAGE_DAY_WEEK_AND_TIME}/>
+        tags={t.USAGE_DAY_WEEK_AND_TIME}
+        tel={t.CNTCT_TEL}/>
         );
         
        setTags(tm)
@@ -114,13 +118,31 @@ const handleSelect = (e) => {
         
     },[tdata])
 
+    useEffect(() => {
+      if (selGuData ==='') {
+        return;
+      }
+
+      let tm = selGuData.map((t, idx) =>
+        <TailCard imgSrc={t.MAIN_IMG_NORMAL}
+        key={`card${idx}`}
+        title={t.MAIN_TITLE}
+        subtitle={t.ITEMCNTNTS}
+        tags={t.USAGE_DAY_WEEK_AND_TIME}
+        tel={t.CNTCT_TEL}/>
+        );
+        
+       setTags(tm)
+
+    }, [selGuData])
+
     
     
   return (
     <div className="py-5 flex flex-col justify-center items-center">
       <TailH1 title={"부산맛집정보"} />
       <form name="kform" className="my-5 w-4/5 flex justify-center items-center">
-                <div className=" w-1/2 mx-4">
+                <div className=" w-1/2 my-4">
                 <TailSelect opItem={gu} handleChange={handleSelect} />
                     {/* <select ref={kwSelect} onChange={handleSelect} value={selected} className="block w-full p-4 ps-10 text-sm
                                                     text-gray-900 border border-gray-300 rounded-lg
@@ -131,14 +153,14 @@ const handleSelect = (e) => {
                      </select> */}
                 </div>
             </form>
-            <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {tags}
             </div>
             {/* 페이지 기능 */}
             <div className="flex flex-col justify-center items-center pt-2">
                     <Pagination
                         activePage={page}   // 현재 페이지
-                        itemsCountPerPage={5}  // 한 페이지에 보여줄 아이템 갯수
+                        itemsCountPerPage={10}  // 한 페이지에 보여줄 아이템 갯수
                         totalItemsCount={totalNum}  // 총 아이템 갯수
                         pageRangeDisplayed={5}  // paginator의 페이지 범위
                         prevPageText={"‹"} // "이전"을 나타낼 텍스트

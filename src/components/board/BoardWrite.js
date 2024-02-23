@@ -8,20 +8,22 @@ export default function BoardWrite() {
   const title = useRef();
   const content = useRef();
   const writer = useRef();
+  const password = useRef();
 
-  
+
   const postClick = () => {
     console.log("postClick", postClick);
-    if (title.current.value === "" || content.current.value === "" || writer.current.value === "") {
-      alert("제목, 내용, 작성자를 입력하세요");
+    if (title.current.value === "" || content.current.value === "" || writer.current.value === "" || password.current.value === "") {
+      alert("제목, 내용, 작성자, 비밀번호를 입력하세요");
       return;
     }
-    
+
     if (window.confirm("게시글을 등록하시겠습니까?")) {
-      axios.post(`http://10.125.121.170:8080/board`,  {
+      axios.post(`http://10.125.121.170:8080/board`, {
         title: title.current.value,
         content: content.current.value,
-        writer: writer.current.value
+        writer: writer.current.value,
+        password: password.current.value
       },
         {
           headers: {
@@ -33,102 +35,61 @@ export default function BoardWrite() {
         navigate("/list");
         console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-        alert("게시글 등록 실패");
-      });
+        .catch((err) => {
+          console.log(err);
+          alert("게시글 등록 실패");
+        });
     }
 
   }
 
-  // const [on, setOn] = useState();
-
-  // const [text, setText] = useState({
-  //   title: "",
-  //   writer: "",
-  //   content: ""
-  // })
-
-  // const { title, writer, content } = text;
-
-  // // console.log(text);
-  // const onChange = (e) => {    
-  //   setText({
-  //     ...text,
-  //     [e.target.name]: e.target.value
-  //   });
-  // }
-
-  // const onReset = () => {
-  //   // setText("");
-  //   setText({
-  //     title: "",
-  //     writer: "",
-  //     content: ""
-  //   });
-  // }
-
-  // const onWrite = () => {
-  //   console.log("message--------------------------");
-    // axios.post(`http://10.125.121.170:8080/board`,
-    //   {
-    //     'title': text.title,
-    //     'writer' : text.writer,
-    //     'content' : text.content
-    //   },
-    //   {headers : {
-    //     "Content-type" : `application/json`
-    //   }
-    // }
-    // )
-    // .then((res) => {
-    //   console.log(res);
-    //   document.location.href = '/list'
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
-  //   setOn(text);
-  // }
-
-
 
 
   return (
-    <div className="w-full h-full">
-      <form className="flex flex-col justify-center items-center h-full">
-        <table className="w-auto h-auto">
-          <tbody>
-            <td className="flex flex-col">제목</td>
-            <input className="border w-full" type="text" ref={title} placeholder="제목을 입력해주세요" />
-            {/* <td className="flex flex-col">
-              <input className="border w-full" type="text" name="title" placeholder="제목을 입력해주세요"/>
-            </td> */}
-          </tbody>
-          <tbody>
-            <td className="flex flex-col">작성자</td>
-            <input className="border w-full h-full" ref={writer} placeholder="작성자를 입력해주세요"></input>
-          </tbody>
-          <tbody>
-            <td className="flex flex-col">내용</td>
-            <textarea className="border w-full h-full" ref={content} placeholder="내용을 입력해주세요"></textarea>
-            {/* <td className="flex flex-col">
-              <textarea className="border w-full h-full"name="content" placeholder="내용을 입력해주세요"></textarea>
-            </td> */}
-          </tbody>
-          <tbody>
-            <div>
-              <button onClick={postClick} type="button">작성</button>
-              &nbsp;&nbsp; | &nbsp;&nbsp;
-              <button type="submit">취소</button>
-              &nbsp;&nbsp; | &nbsp;&nbsp;
-              <Link to={`/list`}><button type="button" value="목록 ">목록</button></Link>
-            </div>
-          </tbody>
-        </table>
-      </form>
-      <div>
-       
+    <div>
+
+      <div className="text-center mt-5">
+        게시글 작성 페이지
+      </div>
+
+
+
+      <div className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center">
+        <form className="flex flex-col justify-center items-center my-5 mx-5">
+          <table className="w-auto h-auto">
+
+            <tbody className="flex mb-5">
+              <td className="flex flex-col">작성자</td>
+              <input className="w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={writer} placeholder="닉네임"></input>              
+              <input className="w-40 flex ml-10 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={password} type="password" placeholder="비밀번호"></input>
+            </tbody>
+            <tbody className="flex mb-5">
+              <td className="flex">제목</td>
+              <input maxLength={20} className="w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
+              {/* <td className="flex flex-col ml-5">작성자</td>
+            <input className="w-24 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={writer} placeholder="닉네임"></input> */}
+
+            </tbody>
+
+            <tbody className="flex">
+              <td>내용</td>
+              <textarea className="h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
+            </tbody>
+
+            {/* 작성, 취소, 목록 버튼 */}
+            <tbody className="text-center">
+              <div>
+                <button onClick={postClick} type="button" className="bg-green-400 rounded-lg text-white p-2">작성</button>
+                &nbsp;&nbsp; | &nbsp;&nbsp;
+                <button type="submit" className="bg-green-400 rounded-lg text-white p-2">취소</button>
+                &nbsp;&nbsp; | &nbsp;&nbsp;
+                <Link to={`/list`}><button type="button" value="목록" className="bg-green-400 rounded-lg text-white p-2">목록</button></Link>
+              </div>
+            </tbody>
+
+          </table>
+        </form>
+
       </div>
     </div>
   )

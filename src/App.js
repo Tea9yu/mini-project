@@ -12,7 +12,7 @@ import BoardWrite from './components/board/BoardWrite';
 import { useState, useEffect } from 'react'; 
 import Nav from './UI/Nav';
 import BoardDetail from './components/board/BoardDetail';
-import Comment from './components/comment/Comment';
+
 
 function App() {
   const [dt, setDt] = useState();
@@ -36,8 +36,7 @@ return (
             <Route path='/list' element={<BoardList2 />} />
             {/* <Route path='/view/:seq' element={<BoardView />} /> */}
             <Route path='/view/:seq' element={<BoardDetail />} />
-            <Route path='/write' element={<BoardWrite />} />
-            <Route path='/cmt' element={<Comment />} />
+            <Route path='/write' element={<BoardWrite />} />            
           </Routes>
       </RecoilRoot>
     </BrowserRouter>
