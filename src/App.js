@@ -7,11 +7,12 @@ import LoginForm from './components/login/LoginForm';
 import RiotAPISearch from './components/search/RiotAPISearch';
 import Main2 from './components/main/Main2';
 import BoardList2 from './components/board/BoardList2';
-import BoardView from './components/board/BoardView';
+// import BoardView from './components/board/BoardView';
 import BoardWrite from './components/board/BoardWrite';
 import { useState, useEffect } from 'react'; 
 import Nav from './UI/Nav';
-import Comment from './components/board/Comment';
+import BoardDetail from './components/board/BoardDetail';
+import Comment from './components/comment/Comment';
 
 function App() {
   const [dt, setDt] = useState();
@@ -33,7 +34,8 @@ return (
             <Route path='/loginform' element={<LoginForm />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/list' element={<BoardList2 />} />
-            <Route path='/view/:seq' element={<BoardView />} />
+            {/* <Route path='/view/:seq' element={<BoardView />} /> */}
+            <Route path='/view/:seq' element={<BoardDetail />} />
             <Route path='/write' element={<BoardWrite />} />
             <Route path='/cmt' element={<Comment />} />
           </Routes>
