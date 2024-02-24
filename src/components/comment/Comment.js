@@ -73,22 +73,34 @@ export default function Comment({ item }) {
             alert("삭제 실패")
             return
         }
-        const inputs ={
-            cmt_id: item.cmt_id,                   
-            password: password.current.value,
-        }
+        // const inputs ={
+        //     cmt_id: item.cmt_id,                   
+        //     password: password.current.value,
+        // }
         if (window.confirm("삭제하시겠습니까?")) {
-            axios.delete(`http://10.125.121.170:8080/board/comments`, {
-                inputs
+            axios.delete(`http://10.125.121.170:8080/board/comments`, 
+            {
+                data: {
+                    cmt_id: item.cmt_id,
+                    password: password.current.value
+                }    
+            }, {
+                headers: {
+                    "Content-type": `application/json`
+                }
             })
                 .then(resp => {
-                    console.log(inputs)
+                    if (resp.data === "삭제 성공"){
+                    // console.log(inputs)
                     alert("삭제되었습니다.");
                     setIsUpdate(false);
                     window.location.reload();
+                    } else {
+                        alert("삭제 실패!");
+                    }
                 })
                 .catch((err) => {
-                    console.log(inputs)
+                    // console.log(inputs)
                     console.log(err)
                     alert("에러가 발생했습니다!");
                 });
