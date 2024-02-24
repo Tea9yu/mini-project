@@ -74,8 +74,9 @@ export default function Comment({ item }) {
             password: password.current.value,
         }
         if (window.confirm("삭제하시겠습니까?")) {
-            axios.delete(`http://10.125.121.170:8080/board/comments`,inputs
-                )
+            axios.delete(`http://10.125.121.170:8080/board/comments`, {
+                inputs
+            })
                 .then(resp => {
                     console.log(inputs)
                     alert("삭제되었습니다.");
