@@ -13,18 +13,18 @@ export default function BusanFoodInfo() {
   const [tdata, setTdata] = useState('');
   
   const [page, setPage] = useState(1);
-  const [totalNum, setTotalNum] = useState(0);
+  const [totalNum, setTotalNum] = useState(260);
   // 총 아이템 갯수를 동적으로 설정하기 위해 JSON 파일의 길이를 이용
   const totalItemCount = getFoodKr.getFoodKr.item.length;
 
-  const [gu, setGu] = useState('');
+  // const [gu, setGu] = useState('');
   const [selGuData, setSelGuData] = useState('');
   const selSido = ["강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"];
 
   // 화면 재 랜더링
   const [tags, setTags] = useState([]);
 
-  const [selected, setSelected] = useState([]);
+  // const [selected, setSelected] = useState([]);
 
   console.log("data:", getFoodKr);
 
@@ -41,23 +41,28 @@ export default function BusanFoodInfo() {
     console.log(e.target.value);
     let tm = tdata.filter(item => item.GUGUN_NM === e.target.value);
     console.log(tm);
+    setTotalNum(tm.length);
     setSelGuData(tm);
+    setPage(1);
 
   }
 
   const itemsPerPage = 10;
 
+  const startIndex = (page - 1) * itemsPerPage;
+  
+  // const currentPageData = 
+  const [currentPageData, setCurrentPageData] = useState([]);
+
+ 
   const getData = async (e) => {
-    const jsonData = getFoodKr.getFoodKr;
+    const jsonData = getFoodKr.getFoodKr.item;
     const totalLength = jsonData.length;
-    const startIndex = (page - 1) * itemsPerPage;
     const endIndex = Math.min(startIndex + itemsPerPage, totalLength);
-    const currentPageData = jsonData.slice(startIndex, endIndex);
+    setCurrentPageData(jsonData.slice(startIndex, endIndex));
 
-    setTdata(currentPageData);
-
-    setTdata(getFoodKr.getFoodKr.item);
-    setTotalNum(getFoodKr.getFoodKr.item.length);
+    setTdata(jsonData);
+    setTotalNum(totalLength);
     console.log ("data=", currentPageData);
     console.log("length=", getFoodKr.getFoodKr.item.length);
 
@@ -86,7 +91,9 @@ export default function BusanFoodInfo() {
 
   // 컴포넌트 업데이트
   useEffect(() => {
-    getData();
+    if (selGuData === "") {
+      getData();
+    }
   }, [page]);
 
   // tdata 변경
@@ -97,7 +104,7 @@ export default function BusanFoodInfo() {
     
     // console.log("totalNum", totalNum);
 
-    let tm = tdata.map((t, idx) =>
+    let tm = currentPageData.map((t, idx) =>
       <TailCard imgSrc={t.MAIN_IMG_NORMAL}
         key={`card${idx}`}
         title={t.MAIN_TITLE}
@@ -109,29 +116,32 @@ export default function BusanFoodInfo() {
     setTags(tm)
 
     //2. 구를 추출해서 저장
-    let tmgu = tdata.map((item) => item.GUGUN_NM)
-    tmgu = [... new Set(tmgu)].sort();  // 집합을 만드려면 new 키워드를 사용해야함. set으로 중복제거
-    setGu(tmgu);
+    // let tmgu = tdata.map((item) => item.GUGUN_NM)
+    // tmgu = [... new Set(tmgu)].sort();  // 집합을 만드려면 new 키워드를 사용해야함. set으로 중복제거
+    // setGu(tmgu);
 
-  }, [tdata])
+  }, [currentPageData])
 
   useEffect(() => {
     if (selGuData === '') {
       return;
     }
 
-    let tm = selGuData.map((t, idx) =>
-      <TailCard imgSrc={t.MAIN_IMG_NORMAL}
-        key={`card${idx}`}
-        title={t.MAIN_TITLE}
-        subtitle={t.ITEMCNTNTS}
-        tags={t.USAGE_DAY_WEEK_AND_TIME}
-        tel={t.CNTCT_TEL} />
-    );
+    const endIndex = Math.min(startIndex + itemsPerPage, selGuData.length);
+    setCurrentPageData(selGuData.slice(startIndex, endIndex));
 
-    setTags(tm)
+    // let tm = currentPageData.map((t, idx) =>
+    //   <TailCard imgSrc={t.MAIN_IMG_NORMAL}
+    //     key={`card${idx}`}
+    //     title={t.MAIN_TITLE}
+    //     subtitle={t.ITEMCNTNTS}
+    //     tags={t.USAGE_DAY_WEEK_AND_TIME}
+    //     tel={t.CNTCT_TEL} />
+    // );
 
-  }, [selGuData])
+    // setTags(tm)
+
+  }, [selGuData, page])
 
 
 
@@ -140,7 +150,7 @@ export default function BusanFoodInfo() {
       <TailH1 title={"부산맛집정보"} />
       <form name="kform" className="my-5 w-4/5 flex justify-center items-center">
         <div className=" w-1/2 my-4">
-          <TailSelect opItem={gu} handleChange={handleSelect} />
+          <TailSelect opItem={selSido} handleChange={handleSelect} />
           {/* <select ref={kwSelect} onChange={handleSelect} value={selected} className="block w-full p-4 ps-10 text-sm
                                                     text-gray-900 border border-gray-300 rounded-lg
                                                     bg-gray-50" placeholder="--지역 선택--"
@@ -158,7 +168,7 @@ export default function BusanFoodInfo() {
         <Pagination
           activePage={page}   // 현재 페이지
           itemsCountPerPage={10}  // 한 페이지에 보여줄 아이템 갯수
-          totalItemsCount={260}  // 총 아이템 갯수
+          totalItemsCount={totalNum}  // 총 아이템 갯수
           pageRangeDisplayed={5}  // paginator의 페이지 범위
           prevPageText={"‹"} // "이전"을 나타낼 텍스트
           nextPageText={"›"} // "다음"을 나타낼 텍스트

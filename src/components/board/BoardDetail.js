@@ -47,15 +47,31 @@ export default function BoardDetail() {
         }
 
         if (window.confirm("삭제하시겠습니까?")) {
-            axios.delete(`http://10.125.121.170:8080/board/${seq}`, {})
-                .then(resp => {
+            axios.delete(`http://10.125.121.170:8080/board`,
+                {
+                    data: {
+                        seq: seq,
+                        password: password.current.value
+                    }
+                }, {
+                headers: {
+                    "Content-type": `application/json`
+                }
+
+            }).then(resp => {
+                if (resp.data === "삭제 성공") {
                     alert("삭제되었습니다.");
                     navigate(`/list`);
-                })
+                } else {
+                    alert("삭제 실패!");
+                }
+            })
                 .catch((err) => {
                     console.log(err);
-                    alert("삭제 실패!");
+                    alert("에러가 발생했습니다!");
                 });
+
+            // console.log("seq확인", seq)
         }
     }
 
@@ -67,11 +83,11 @@ export default function BoardDetail() {
             setIsUpdate(true);
             return;
         }
-       
-            console.log("value",updateTitle.current.value,updateContent.current,password.current.value)
-            // return
-        
-        console.log("value",updateTitle.current.value , updateContent.current.value , updateWriter.current.value , password.current.value )
+
+        console.log("value", updateTitle.current.value, updateContent.current, password.current.value)
+        // return
+
+        console.log("value", updateTitle.current.value, updateContent.current.value, updateWriter.current.value, password.current.value)
         if (updateTitle.current.value === "" || updateContent.current.value === "" || updateWriter.current.value === "" || password.current.value === "") {
             alert("수정할 항목을 입력해주세요");
             return;
@@ -83,20 +99,24 @@ export default function BoardDetail() {
                 title: updateTitle.current.value,
                 content: updateContent.current.value,
                 writer: updateWriter.current.value,
-                Password: password.current.value
+                password: password.current.value
             }, {
                 headers: {
                     "Content-type": `application/json`
                 }
             })
                 .then(resp => {
+                    if (resp.data === "게시판 업데이트 완료"){
                     alert("수정되었습니다.");
                     setIsUpdate(false);
                     window.location.reload();
+                    } else {
+                        alert("게시글 수정 실패");
+                    }
                 })
                 .catch(err => {
                     console.log(err);
-                    alert("게시글 수정 실패!");
+                    alert("에러가 발생했습니다!");
                 });
         }
     }
@@ -225,7 +245,7 @@ export default function BoardDetail() {
                     </div> */}
 
                         </div>
-                        
+
 
 
                     </div>

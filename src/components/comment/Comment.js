@@ -34,13 +34,17 @@ export default function Comment({ item }) {
                 }
             })
                 .then((res) => {
+                    if (res.data === "업데이트 성공") {
                     alert("수정되었습니다.");
                     setIsUpdate(false);
                     window.location.reload();
+                    } else {
+                        alert("댓글 수정 실패!");
+                    }
                 })
                 .catch((err) => {
                     console.log(err);
-                    alert("댓글 수정 실패!");
+                    alert("에러가 발생했습니다!");
                 });
 
         }
@@ -86,7 +90,7 @@ export default function Comment({ item }) {
                 .catch((err) => {
                     console.log(inputs)
                     console.log(err)
-                    alert("삭제 실패!");
+                    alert("에러가 발생했습니다!");
                 });
 
         }
