@@ -156,7 +156,7 @@ export default function BoardDetail() {
             <div className="mb-5">
                 게시판 상세 페이지
             </div>
-            <div name="음영 테두리" className="flex items-center relative overflow-x-auto w-3/4 shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center">
+            <div name="음영 테두리" className="flex items-center relative overflow-x-auto w-3/4 shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
                 <form className="mt-10 justify-center items-center">
                     {/* <table>
                         <tbody>
@@ -167,16 +167,16 @@ export default function BoardDetail() {
                         <div className="flex">
                             <div className="border flex justify-center items-center w-20 py-2">제목</div>
                             <div className="border flex justify-center items-center flex-grow">
-                                {/* <input className="flex justify-center items-center flex-grow bg-green-50" ref={updateTitle} type="text" name="title" defaultValue={boardDetail.title} /> */}
+                                {/* <input className="flex justify-center items-center flex-grow bg-orange-50" ref={updateTitle} type="text" name="title" defaultValue={boardDetail.title} /> */}
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input className="flex justify-center items-center flex-grow bg-green-50" type="text" ref={updateTitle} name="title" defaultValue={boardDetail.title} />
+                                    <input maxLength={30} className="flex justify-center items-center flex-grow bg-orange-50" type="text" ref={updateTitle} name="title" defaultValue={boardDetail.title} />
                                     //  수정 불가능 속성
-                                    : <div className="flex justify-center items-center flex-grow bg-green-50">{boardDetail.title}</div>
+                                    : <div className="flex justify-center items-center flex-grow bg-orange-50">{boardDetail.title}</div>
                                 }
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
+                                    <input maxLength={20} className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
                                     //  수정 불가능 속성
                                     : <div>{''}</div>}
                             </div>
@@ -185,12 +185,12 @@ export default function BoardDetail() {
                         {/* 작성자, 작성일, 조회수 */}
                         <div className="flex auto">
                             <div className="border flex justify-center items-center w-20">작성자</div>
-                            {/* <input type="text" className="border flex justify-center items-center w-20 bg-green-50" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} /> */}
+                            {/* <input type="text" className="border flex justify-center items-center w-20 bg-orange-50" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} /> */}
                             {isUpdate ?
                                 // 수정 가능속성
-                                <input className="border flex justify-center items-center w-20 bg-green-50" type="text" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} />
+                                <input maxLength={10} className="border flex justify-center items-center w-20 bg-orange-50" type="text" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} />
                                 //  수정 불가능 속성
-                                : <div className="border flex justify-center items-center w-20 bg-green-50" >{boardDetail.writer} </div>
+                                : <div className="border flex justify-center items-center w-20 bg-orange-50" >{boardDetail.writer} </div>
                             }
                             <div className="border flex justify-center items-center w-20">작성일</div>
                             <div className="border flex justify-center items-center w-44 ">{boardDetail.createDate}</div>
@@ -203,12 +203,12 @@ export default function BoardDetail() {
                         <div className="flex">
                             <div className="border flex justify-center items-center w-20">내용</div>
                             <div className="border flex justify-center items-center py-5 flex-grow">
-                                {/* <input className="flex justify-center items-center flex-grow bg-green-50" ref={updateContent} type="text" name="content" defaultValue={boardDetail.content} /> */}
+                                {/* <input className="flex justify-center items-center flex-grow bg-orange-50" ref={updateContent} type="text" name="content" defaultValue={boardDetail.content} /> */}
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input className="flex justify-center items-center flex-grow bg-green-50 border border-b-slate-500" type="text" ref={updateContent} name="content" defaultValue={boardDetail.content} />
+                                    <input className="flex justify-center items-center flex-grow bg-orange-50 border border-b-slate-500" type="text" ref={updateContent} name="content" defaultValue={boardDetail.content} />
                                     //  수정 불가능 속성
-                                    : <div className="flex justify-center items-center flex-grow bg-green-50" >{boardDetail.content}</div>
+                                    : <div className="flex justify-center items-center flex-grow bg-orange-50" >{boardDetail.content}</div>
                                 }
 
                             </div>
@@ -218,16 +218,16 @@ export default function BoardDetail() {
                         <div>
                             <div className="my-7">
                                 <div className="flex justify-center items-center mt-3">
-                                    {/* <Link><button className="bg-green-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button></Link> */}
+                                    {/* <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button></Link> */}
                                     {isUpdate ?
-                                        <button className="bg-green-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button>
+                                        <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button>
                                         :
-                                        <button className="bg-green-400 rounded-lg text-white p-2" type="button" onClick={handleClickEdit}>수정</button>
+                                        <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleClickEdit}>수정</button>
                                     }
                                     &nbsp;&nbsp; | &nbsp;&nbsp;
-                                    <Link><button className="bg-green-400 rounded-lg text-white p-2" type="button" onClick={handleDelete}>삭제</button></Link>
+                                    <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleDelete}>삭제</button></Link>
                                     &nbsp;&nbsp; | &nbsp;&nbsp;
-                                    <Link to={`/list`}><button className="bg-green-400 rounded-lg text-white p-2">목록</button></Link>
+                                    <Link to={`/list`}><button className="bg-orange-400 rounded-lg text-white p-2">목록</button></Link>
                                 </div>
                             </div>
                             {/* 댓글목록*/}
@@ -241,7 +241,7 @@ export default function BoardDetail() {
                         <input className="flex border justify-center items-center flex-grow" placeholder="  비밀번호" type="text" name="reple" value={reple.cmt_content} />
                       </div>
                       <input className="flex border justify-center items-center flex-grow" placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
-                      <button className="border border-green-900 bg-green-400 rounded-lg text-white ml-2 px-2 py-2">작성</button>
+                      <button className="border border-orange-900 bg-orange-400 rounded-lg text-white ml-2 px-2 py-2">작성</button>
                     </div> */}
 
                         </div>

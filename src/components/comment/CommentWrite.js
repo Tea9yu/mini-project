@@ -58,7 +58,7 @@ export default function CommentWrite({ seq }) {
                     <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="reple" value={reple.password} />
                 </div>
                 <input className="flex border justify-center items-center flex-grow" ref={cmt_content} placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
-                <button className="border border-green-900 bg-green-400 rounded-lg text-white ml-2 px-2 py-2" type="button" onClick={postCmtClick} >작성</button>
+                <button className="border border-orange-900 bg-orange-400 rounded-lg text-white ml-2 px-2 py-2" type="button" onClick={postCmtClick} >작성</button>
                 
             </div>
         </div>

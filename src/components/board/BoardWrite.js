@@ -54,36 +54,36 @@ export default function BoardWrite() {
 
 
 
-      <div className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center">
+      <div className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
         <form className="flex flex-col justify-center items-center my-5 mx-5">
           <table className="w-auto h-auto">
 
             <tbody className="flex mb-5">
               <td className="flex flex-col">작성자</td>
-              <input className="w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={writer} placeholder="닉네임"></input>              
-              <input className="w-40 flex ml-10 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={password} type="password" placeholder="비밀번호"></input>
+              <input maxLength={20} className="w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input>              
+              <input className="w-40 flex ml-10 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={password} type="password" placeholder="비밀번호"></input>
             </tbody>
             <tbody className="flex mb-5">
               <td className="flex">제목</td>
-              <input maxLength={20} className="w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
+              <input maxLength={20} className="w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
               {/* <td className="flex flex-col ml-5">작성자</td>
-            <input className="w-24 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={writer} placeholder="닉네임"></input> */}
+            <input className="w-24 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input> */}
 
             </tbody>
 
             <tbody className="flex">
               <td>내용</td>
-              <textarea className="h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-green-50 border-2 border-green-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
+              <textarea className="h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
             </tbody>
 
             {/* 작성, 취소, 목록 버튼 */}
             <tbody className="text-center">
               <div>
-                <button onClick={postClick} type="button" className="bg-green-400 rounded-lg text-white p-2">작성</button>
+                <button onClick={postClick} type="button" className="bg-orange-400 rounded-lg text-white p-2">작성</button>
                 &nbsp;&nbsp; | &nbsp;&nbsp;
-                <button type="submit" className="bg-green-400 rounded-lg text-white p-2">취소</button>
+                <button type="submit" className="bg-orange-400 rounded-lg text-white p-2">취소</button>
                 &nbsp;&nbsp; | &nbsp;&nbsp;
-                <Link to={`/list`}><button type="button" value="목록" className="bg-green-400 rounded-lg text-white p-2">목록</button></Link>
+                <Link to={`/list`}><button type="button" value="목록" className="bg-orange-400 rounded-lg text-white p-2">목록</button></Link>
               </div>
             </tbody>
 

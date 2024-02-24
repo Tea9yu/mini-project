@@ -6,9 +6,9 @@ export default function Nav() {
     <div className="flex justify-center items-center gap-4">
       <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
     <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-        <a href="#" class="flex items-center">
-            <img src="https://www.svgrepo.com/show/499962/music.svg" class="h-6 mr-3 sm:h-9" alt="Landwind Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Landwind</span>
+        <a href="#" className="flex items-center">
+            <img src="https://www.svgrepo.com/show/499962/music.svg" className="h-6 mr-3 sm:h-9" alt="Landwind Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MasZip</span>
         </a>
         <div className="flex items-center lg:order-2">
             <div className="hidden mt-2 mr-4 sm:inline-block">

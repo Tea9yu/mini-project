@@ -106,7 +106,7 @@ export default function BoardList() {
 
         let tag = boardList.map((item) =>
 
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-green-100 hover:text-stone-950 hover:font-bold dark:hover:bg-gray-600">
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-orange-100 hover:text-stone-950 hover:font-bold dark:hover:bg-gray-600">
 
                 <td className="px-6 py-4">
                     <span className="inline-flex justify-center items-center w-5 h-5 bg-slate-500 text-white rounded-md mx-2">
@@ -143,7 +143,7 @@ export default function BoardList() {
 
 
                 {/* 제일 상단.  검색창, 글 작성하기  */}
-                <div className="flex m-4 bg-green-400" >
+                <div className="flex m-4 bg-orange-400" >
                     <form>
                         <table className="flex flex-col justify-center items-center border">
                             <tr className="flex flex-col items-center justify-center w-full h-full">
@@ -157,9 +157,9 @@ export default function BoardList() {
                                     </select>
 
                                     {/* 검색 */}
-                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className=" border-green-500 border-solid border-4" type="text" name="searchWord"  />
-                                    <button onClick={boardListSearch} className="rounded-lg border-green-500 border-solid border-4" type="button" value="검색" >검색</button>
-                                    <Link to={`/write`}><button className=" rounded-lg border-green-500 border-solid border-4" type="button" value="글쓰기">글쓰기</button></Link>
+                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className=" border-orange-500 border-solid border-4" type="text" name="searchWord"  />
+                                    <button onClick={boardListSearch} className="rounded-lg border-orange-500 border-solid border-4" type="button" value="검색" >검색</button>
+                                    <Link to={`/write`}><button className=" rounded-lg border-orange-500 border-solid border-4" type="button" value="글쓰기">글쓰기</button></Link>
                                 </td>
                             </tr>
                         </table>

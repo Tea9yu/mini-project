@@ -123,20 +123,20 @@ export default function Comment({ item }) {
                     <div className="flex justify-center items-center  h-full">
                         {isUpdate ?
                             // 수정 가능속성
-                            <input className=" bg-green-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
+                            <input className=" bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
                             //  수정 불가능 속성
                             : <div>{item.cmt_content}</div>}
                     </div>
 
                     <div>
                         {isUpdate ?
-                            <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtUpdate}>등록</button>
+                            <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtUpdate}>등록</button>
 
                             :
-                            <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtClickEdit}>수정</button>
+                            <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtClickEdit}>수정</button>
 
                         }
-                        <button className="bg-green-400 rounded-lg text-white p-2" onClick={handleCmtDelete}>삭제</button>
+                        <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtDelete}>삭제</button>
                     </div>
                 </div>
             </div>
