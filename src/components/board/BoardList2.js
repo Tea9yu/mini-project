@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import './paginate.css';
+import DateFormat from "./DateFormat";
 
 export default function BoardList() {
     const [boardList, setBoardList] = useState([]);
@@ -123,7 +124,7 @@ export default function BoardList() {
                 </td>
 
                 <td className="px-6 py-4">
-                    {item.createDate.slice(0, 10)}
+                    <DateFormat createDate={item.createDate} />
                 </td>
 
                 <td className="px-6 py-4 ">

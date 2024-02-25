@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import CommentWrite from "../comment/CommentWrite";
 import Comment from "../comment/Comment";
+import DateFormat from "./DateFormat";
 
 export default function BoardDetail() {
     let seq = useParams().seq;
@@ -156,7 +157,7 @@ export default function BoardDetail() {
             <div className="mb-5">
                 게시판 상세 페이지
             </div>
-            <div name="음영 테두리" className="flex items-center relative overflow-x-auto w-3/4 shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
+            <div name="음영 테두리" className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
                 <form className="mt-10 justify-center items-center">
                     {/* <table>
                         <tbody>
@@ -193,7 +194,7 @@ export default function BoardDetail() {
                                 : <div className="border flex justify-center items-center w-20 bg-orange-50" >{boardDetail.writer} </div>
                             }
                             <div className="border flex justify-center items-center w-20">작성일</div>
-                            <div className="border flex justify-center items-center w-44 ">{boardDetail.createDate}</div>
+                            <div className="border flex justify-center items-center w-44 "><DateFormat createDate={boardDetail.createDate}/></div>
                             <div className="border flex justify-center items-center w-20">조회수</div>
                             <div className="border flex justify-center items-center w-20 flex-grow">{boardDetail.cnt}</div>
                         </div>

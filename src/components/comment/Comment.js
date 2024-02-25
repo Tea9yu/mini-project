@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DateFormat from "../board/DateFormat";
 
 
 export default function Comment({ item }) {
@@ -117,7 +118,7 @@ export default function Comment({ item }) {
                         <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
                         //  수정 불가능 속성
                         : <div>{''}</div>}
-                    <div className="flex justify-center items-center  h-full">{item.createDate}</div>
+                    <div className="flex justify-center items-center  h-full"><DateFormat createDate={item.createDate}/></div>
                 </div>
                 <div className="flex flex-row justify-between space-x-6 ">
                     <div className="flex justify-center items-center  h-full">
