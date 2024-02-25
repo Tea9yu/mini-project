@@ -110,7 +110,8 @@ export default function BusanFoodInfo() {
         title={t.MAIN_TITLE}
         subtitle={t.ITEMCNTNTS}
         tags={t.USAGE_DAY_WEEK_AND_TIME}
-        tel={t.CNTCT_TEL} />
+        tel={t.CNTCT_TEL}
+        addr={t.ADDR1}/>
     );
 
     setTags(tm)

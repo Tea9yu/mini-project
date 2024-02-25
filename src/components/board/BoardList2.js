@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import './paginate.css';
 import DateFormat from "./DateFormat";
+import { PiPencilLineBold } from "react-icons/pi";
+import { MdOutlineSearch } from "react-icons/md";
+
 
 export default function BoardList() {
     const [boardList, setBoardList] = useState([]);
@@ -110,7 +113,7 @@ export default function BoardList() {
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-orange-100 hover:text-stone-950 hover:font-bold dark:hover:bg-gray-600">
 
                 <td className="px-6 py-4">
-                    <span className="inline-flex justify-center items-center w-5 h-5 bg-slate-500 text-white rounded-md mx-2">
+                    <span className="inline-flex justify-center items-center w-5 h-5 bg-orange-300 text-white rounded-md mx-2">
                         <Link to={`/view/${item.seq}`} >{item.seq}</Link>
                     </span>
                 </td>
@@ -139,16 +142,18 @@ export default function BoardList() {
     }, [boardList]);
 
     return (
-        <div className="container mx-auto h-screen">
+        <div className="mx-auto h-screen bg-orange-50">
             <div className="flex flex-col justify-center items-center w-full h-full">
 
 
                 {/* 제일 상단.  검색창, 글 작성하기  */}
-                <div className="flex m-4 bg-orange-400" >
-                    <form>
-                        <table className="flex flex-col justify-center items-center border">
+                <div className="flex m-4 mb-8 ml-48 gap-x-48" >
+                    <form className="rounded-lg bg-orange-300">
+
+                        <table className="flex flex-col justify-center items-center">
                             <tr className="flex flex-col items-center justify-center w-full h-full">
                                 <td className="flex gap-2 justify-center items-center w-full h-full">
+                                   
                                     {/* 검색 할 때  */}
                                     <select className="ml-1.5" name="searchField" onChange={handleSearchFieldChange}>
                                         <option value="title">제목</option>
@@ -158,21 +163,41 @@ export default function BoardList() {
                                     </select>
 
                                     {/* 검색 */}
-                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className=" border-orange-500 border-solid border-4" type="text" name="searchWord"  />
-                                    <button onClick={boardListSearch} className="rounded-lg border-orange-500 border-solid border-4" type="button" value="검색" >검색</button>
-                                    <Link to={`/write`}><button className=" rounded-lg border-orange-500 border-solid border-4" type="button" value="글쓰기">글쓰기</button></Link>
+                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className=" border-orange-300 border-solid border-4" type="text" name="searchWord"  />
+                                    <button onClick={boardListSearch} className="flex rounded-lg border-orange-300 border-solid" type="button" value="검색" >
+                                        <div className="mt-1">
+                                        <MdOutlineSearch />
+                                        </div>
+                                        검색 &nbsp;
+                                        </button>
+
+                                    
                                 </td>
                             </tr>
                         </table>
+
+                       
                     </form>
+                     {/* 글쓰기 */}
+                    
+                     <Link to={`/write`}>
+                        <div className="bg-orange-300 rounded-lg border-orange-300 border-solid border-4" type="button" value="글쓰기">
+                         <button className="flex" >
+                            <div className="mt-1">
+                                <PiPencilLineBold />
+                            </div>
+                                글쓰기
+                        </button>
+                        </div>
+                     </Link>
+                    
                 </div>
 
 
                 {/* 컬럼 이름 */}
-
-                <div className="relative overflow-x-auto w-3/4 shadow-md sm:rounded-lg">
+                <div className="relative w-3/4 shadow-md sm:rounded-lg bg-orange-50 border-4 border-orange-200 justify-center">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <thead className="border-b-4 border-orange-200 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     번호

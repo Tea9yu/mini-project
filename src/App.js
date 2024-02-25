@@ -28,13 +28,8 @@ return (
           </div>
         </div>
           <Routes>
-            <Route path='/' element={<Main2 />} />
-            <Route path='/search' element={<RiotAPISearch />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/loginform' element={<LoginForm />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/list' element={<BoardList2 />} />
-            {/* <Route path='/view/:seq' element={<BoardView />} /> */}
+            <Route path='/' element={<Main2 />} />                                    
+            <Route path='/list' element={<BoardList2 />} />            
             <Route path='/view/:seq' element={<BoardDetail />} />
             <Route path='/write' element={<BoardWrite />} />            
           </Routes>

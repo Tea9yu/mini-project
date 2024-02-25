@@ -107,10 +107,10 @@ export default function BoardDetail() {
                 }
             })
                 .then(resp => {
-                    if (resp.data === "게시판 업데이트 완료"){
-                    alert("수정되었습니다.");
-                    setIsUpdate(false);
-                    window.location.reload();
+                    if (resp.data === "게시판 업데이트 완료") {
+                        alert("수정되었습니다.");
+                        setIsUpdate(false);
+                        window.location.reload();
                     } else {
                         alert("게시글 수정 실패");
                     }
@@ -153,17 +153,13 @@ export default function BoardDetail() {
 
 
     return (
-        <div className="flex flex-col justify-center items-center mt-5">
+        <div className="flex flex-col justify-center items-center mt-5 bg-orange-50 min-h-full ">
             <div className="mb-5">
                 게시판 상세 페이지
             </div>
-            <div name="음영 테두리" className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
-                <form className="mt-10 justify-center items-center">
-                    {/* <table>
-                        <tbody>
-                            <tr> */}
+            <div name="음영 테두리" className="flex w-5/6 mt-10 mx-auto max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
+                <form className="mt-10 justify-center items-center w-full">                    
                     <div className="w-full h-full">
-
                         {/* 제목 */}
                         <div className="flex">
                             <div className="border flex justify-center items-center w-20 py-2">제목</div>
@@ -182,7 +178,6 @@ export default function BoardDetail() {
                                     : <div>{''}</div>}
                             </div>
                         </div>
-
                         {/* 작성자, 작성일, 조회수 */}
                         <div className="flex auto">
                             <div className="border flex justify-center items-center w-20">작성자</div>
@@ -194,13 +189,10 @@ export default function BoardDetail() {
                                 : <div className="border flex justify-center items-center w-20 bg-orange-50" >{boardDetail.writer} </div>
                             }
                             <div className="border flex justify-center items-center w-20">작성일</div>
-                            <div className="border flex justify-center items-center w-44 "><DateFormat createDate={boardDetail.createDate}/></div>
+                            <div className="border flex justify-center items-center w-44 "><DateFormat createDate={boardDetail.createDate} /></div>
                             <div className="border flex justify-center items-center w-20">조회수</div>
                             <div className="border flex justify-center items-center w-20 flex-grow">{boardDetail.cnt}</div>
                         </div>
-
-
-
                         <div className="flex">
                             <div className="border flex justify-center items-center w-20">내용</div>
                             <div className="border flex justify-center items-center py-5 flex-grow">
@@ -211,10 +203,8 @@ export default function BoardDetail() {
                                     //  수정 불가능 속성
                                     : <div className="flex justify-center items-center flex-grow bg-orange-50" >{boardDetail.content}</div>
                                 }
-
                             </div>
                         </div>
-
                         {/* 제일 밑에 수정, 삭제, 목록 버튼 */}
                         <div>
                             <div className="my-7">
@@ -234,7 +224,6 @@ export default function BoardDetail() {
                             {/* 댓글목록*/}
                             <div className="mt-10 mb-5">댓글</div>
                             {reple}
-
                             {/* 댓글작성 */}
                             {/* <div className="flex mt-10 ">
                       <div className="ml-5">
@@ -244,24 +233,11 @@ export default function BoardDetail() {
                       <input className="flex border justify-center items-center flex-grow" placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
                       <button className="border border-orange-900 bg-orange-400 rounded-lg text-white ml-2 px-2 py-2">작성</button>
                     </div> */}
-
                         </div>
-
-
-
-                    </div>
-                    {/* </tr>
-                        </tbody>
-                    </table> */}
+                    </div>                    
                     <CommentWrite seq={seq} />
                 </form>
-
-
-
-
             </div>
-
-
         </div>
     );
 };

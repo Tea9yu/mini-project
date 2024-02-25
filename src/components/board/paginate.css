@@ -33,7 +33,7 @@ ul.pagination li:last-child {
 ul.pagination li a {
     text-decoration: none;
     /*color: #0d812a;*/
-    color: #cf6712;
+    color: rgb(253 186 116);
     font-size: 1rem;
 }
 
@@ -43,7 +43,7 @@ ul.pagination li.active a {
 
 ul.pagination li.active {
     /*background-color: #16c78c;*/
-    background-color: #c76616;
+    background-color: rgb(253 186 116);
     color: white;
 }
 

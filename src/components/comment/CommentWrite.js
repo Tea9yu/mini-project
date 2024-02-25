@@ -46,7 +46,7 @@ export default function CommentWrite({ seq }) {
 
     return (
         <div>
-            <div className="flex mt-10 ">
+            <div className="pb-5 flex mt-10 ">
                 <div className="ml-5">
                     {/* {isUpdate ?
                         // 수정 가능속성

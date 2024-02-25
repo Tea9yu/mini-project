@@ -6,7 +6,7 @@ export default function Main2() {
     <div>
         <div>
             <BusanFoodInfo />
-        </div>      
+        </div>
     </div>
   )
 }
