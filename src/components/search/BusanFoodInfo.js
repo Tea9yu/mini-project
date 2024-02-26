@@ -11,7 +11,7 @@ export default function BusanFoodInfo() {
   // let apikey = process.env.REACT_APP_APIKEY;
 
   const [tdata, setTdata] = useState('');
-  
+
   const [page, setPage] = useState(1);
   const [totalNum, setTotalNum] = useState(260);
   // 총 아이템 갯수를 동적으로 설정하기 위해 JSON 파일의 길이를 이용
@@ -28,9 +28,9 @@ export default function BusanFoodInfo() {
 
   console.log("data:", getFoodKr);
 
-  console.log("totalNum:",totalNum);
+  console.log("totalNum:", totalNum);
   console.log("handle", page)
-  
+
   // 페이지 넘버를 변경할때 사용
   const handlePageChange = (page) => {
     setPage(page);
@@ -44,17 +44,17 @@ export default function BusanFoodInfo() {
     setTotalNum(tm.length);
     setSelGuData(tm);
     setPage(1);
-
   }
 
+  // 한 페이지에 보여주는 아이템 갯수
   const itemsPerPage = 10;
 
   const startIndex = (page - 1) * itemsPerPage;
-  
+
   // const currentPageData = 
   const [currentPageData, setCurrentPageData] = useState([]);
 
- 
+
   const getData = async (e) => {
     const jsonData = getFoodKr.getFoodKr.item;
     const totalLength = jsonData.length;
@@ -63,7 +63,7 @@ export default function BusanFoodInfo() {
 
     setTdata(jsonData);
     setTotalNum(totalLength);
-    console.log ("data=", currentPageData);
+    console.log("data=", currentPageData);
     console.log("length=", getFoodKr.getFoodKr.item.length);
 
     // // URL
@@ -101,7 +101,7 @@ export default function BusanFoodInfo() {
     if (tdata === '') {
       return;
     }
-    
+
     // console.log("totalNum", totalNum);
 
     let tm = currentPageData.map((t, idx) =>
@@ -111,7 +111,7 @@ export default function BusanFoodInfo() {
         subtitle={t.ITEMCNTNTS}
         tags={t.USAGE_DAY_WEEK_AND_TIME}
         tel={t.CNTCT_TEL}
-        addr={t.ADDR1}/>
+        addr={t.ADDR1} />
     );
 
     setTags(tm)
@@ -144,10 +144,27 @@ export default function BusanFoodInfo() {
 
   }, [selGuData, page])
 
+  // const searchInput = useRef();
+
+  // const handleSearch = async (e) => {
+  //   e.prevenDefault();
+  // }
+
+  const searchInput = useRef(); // 검색 필드를 참조하기 위한 useRef 사용
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchKeyword = searchInput.current.value; // 검색어 가져오기
+    const filteredData = tdata.filter(item =>
+      item.MAIN_TITLE.toLowerCase().includes(searchKeyword.toLowerCase())
+    ); // 검색어를 포함하는 아이템 필터링
+    setTags(filteredData); // 필터링된 데이터로 태그 업데이트
+  }
+
 
 
   return (
-    <div className="py-5 flex flex-col justify-center items-center">
+    <div className="py-5 flex flex-col justify-center items-center bg-orange-50">
       <TailH1 title={"부산맛집정보"} />
       <form name="kform" className="my-5 w-4/5 flex justify-center items-center">
         <div className=" w-1/2 my-4">
@@ -160,6 +177,31 @@ export default function BusanFoodInfo() {
                                                     <option value="지역선택">--지역선택--</option>
                      </select> */}
         </div>
+        <input
+          ref={searchInput}
+          type="search"
+          id="search"
+          className="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search"
+          required
+        />
+        <button
+          type="submit"
+          onClick={handleSearch} // 검색 버튼 클릭 시 handleSearch 함수 호출
+          className="mt- text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Search
+        </button>
+
+        {/* <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+          </div>
+          <input type="search" id="search" class="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required />
+          <button type="submit" class="mt- text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+        </div> */}
       </form>
       <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {tags}

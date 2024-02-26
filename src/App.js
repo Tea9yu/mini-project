@@ -12,6 +12,8 @@ import BoardWrite from './components/board/BoardWrite';
 import { useState, useEffect } from 'react'; 
 import Nav from './UI/Nav';
 import BoardDetail from './components/board/BoardDetail';
+import Home from './components/main/Home';
+import BusanFoodInfo from './components/search/BusanFoodInfo';
 
 
 function App() {
@@ -28,7 +30,8 @@ return (
           </div>
         </div>
           <Routes>
-            <Route path='/' element={<Main2 />} />                                    
+            <Route path='/' element={<Home />} />
+            <Route path='/food' element={<BusanFoodInfo />} />
             <Route path='/list' element={<BoardList2 />} />            
             <Route path='/view/:seq' element={<BoardDetail />} />
             <Route path='/write' element={<BoardWrite />} />            

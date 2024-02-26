@@ -2,6 +2,8 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DateFormat from "../board/DateFormat";
+import { FaTrashCan } from "react-icons/fa6";
+import { FaRegEdit } from "react-icons/fa";
 
 
 export default function Comment({ item }) {
@@ -115,13 +117,13 @@ export default function Comment({ item }) {
                     <div className="flex justify-center items-center h-full">{item.cmt_writer}</div>
                     {isUpdate ?
                         // 수정 가능속성
-                        <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
+                        <input className="flex border justify-center items-center flex-grow w-1/5 h-8" ref={password} placeholder="  비밀번호" type="password" name="password" />
                         //  수정 불가능 속성
                         : <div>{''}</div>}
                     <div className="flex justify-center items-center  h-full"><DateFormat createDate={item.createDate}/></div>
                 </div>
-                <div className="flex flex-row justify-between space-x-6 ">
-                    <div className="flex justify-center items-center  h-full">
+                <div className="flex flex-row justify-between space-x-6 mt-2">
+                    <div className="flex justify-center items-center h-full ">
                         {isUpdate ?
                             // 수정 가능속성
                             <input className=" bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
@@ -134,10 +136,10 @@ export default function Comment({ item }) {
                             <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtUpdate}>등록</button>
 
                             :
-                            <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtClickEdit}>수정</button>
+                            <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtClickEdit}><FaRegEdit /></button>
 
                         }
-                        <button className="bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtDelete}>삭제</button>
+                        <button className="ml-2 bg-orange-400 rounded-lg text-white p-2" onClick={handleCmtDelete}><FaTrashCan/></button>
                     </div>
                 </div>
             </div>

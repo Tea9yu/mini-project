@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import CommentWrite from "../comment/CommentWrite";
 import Comment from "../comment/Comment";
 import DateFormat from "./DateFormat";
+import { FaTrashCan } from "react-icons/fa6";
+import { FaList } from "react-icons/fa6";
+import { FaRegEdit } from "react-icons/fa";
 
 export default function BoardDetail() {
     let seq = useParams().seq;
@@ -154,11 +157,32 @@ export default function BoardDetail() {
 
     return (
         <div className="flex flex-col justify-center items-center mt-5 bg-orange-50 min-h-full ">
-            <div className="mb-5">
+            <div className="mb-5 ">
                 게시판 상세 페이지
             </div>
-            <div name="음영 테두리" className="flex w-5/6 mt-10 mx-auto max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
-                <form className="mt-10 justify-center items-center w-full">                    
+            <div name="음영 테두리" className="flex w-5/6 mt-10 max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
+                <form className="mt-10 justify-center items-center w-full">
+
+                    {/* 제일 밑에 수정, 삭제, 목록 버튼 */}
+                    <div className="mb-5">
+                        <div className="flex justify-center items-center mt-3">
+                            {/* <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button></Link> */}
+
+                            <Link to={`/list`}><button className="flex bg-orange-400 rounded-lg text-white p-2 mr-96"><FaList className="mt-1 mr-1" />목록</button></Link>
+                            &nbsp;&nbsp;  &nbsp;&nbsp;
+
+
+                            {isUpdate ?
+                                <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button>
+                                :
+                                <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleClickEdit}><FaRegEdit /></button>
+                            }
+
+                            &nbsp;&nbsp;  &nbsp;&nbsp;
+                            <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleDelete}><FaTrashCan /></button></Link>
+                        </div>
+                    </div>
+
                     <div className="w-full h-full">
                         {/* 제목 */}
                         <div className="flex">
@@ -179,7 +203,7 @@ export default function BoardDetail() {
                             </div>
                         </div>
                         {/* 작성자, 작성일, 조회수 */}
-                        <div className="flex auto">
+                        <div className="flex">
                             <div className="border flex justify-center items-center w-20">작성자</div>
                             {/* <input type="text" className="border flex justify-center items-center w-20 bg-orange-50" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} /> */}
                             {isUpdate ?
@@ -205,40 +229,15 @@ export default function BoardDetail() {
                                 }
                             </div>
                         </div>
-                        {/* 제일 밑에 수정, 삭제, 목록 버튼 */}
                         <div>
-                            <div className="my-7">
-                                <div className="flex justify-center items-center mt-3">
-                                    {/* <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button></Link> */}
-                                    {isUpdate ?
-                                        <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleUpdate}>제출</button>
-                                        :
-                                        <button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleClickEdit}>수정</button>
-                                    }
-                                    &nbsp;&nbsp; | &nbsp;&nbsp;
-                                    <Link><button className="bg-orange-400 rounded-lg text-white p-2" type="button" onClick={handleDelete}>삭제</button></Link>
-                                    &nbsp;&nbsp; | &nbsp;&nbsp;
-                                    <Link to={`/list`}><button className="bg-orange-400 rounded-lg text-white p-2">목록</button></Link>
-                                </div>
-                            </div>
                             {/* 댓글목록*/}
-                            <div className="mt-10 mb-5">댓글</div>
+                            <div className="mt-32 mb-5"></div>
                             {reple}
-                            {/* 댓글작성 */}
-                            {/* <div className="flex mt-10 ">
-                      <div className="ml-5">
-                        <input className="flex border justify-center items-center flex-grow" placeholder="  닉네임" type="text" name="reple" value={reple.cmt_content} />
-                        <input className="flex border justify-center items-center flex-grow" placeholder="  비밀번호" type="text" name="reple" value={reple.cmt_content} />
-                      </div>
-                      <input className="flex border justify-center items-center flex-grow" placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
-                      <button className="border border-orange-900 bg-orange-400 rounded-lg text-white ml-2 px-2 py-2">작성</button>
-                    </div> */}
                         </div>
-                    </div>                    
+                    </div>
                     <CommentWrite seq={seq} />
                 </form>
             </div>
         </div>
     );
 };
-

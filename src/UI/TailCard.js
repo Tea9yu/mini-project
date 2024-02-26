@@ -18,7 +18,7 @@ export default function TailCard({ imgSrc, title, subtitle, tags, tel, addr }) {
 
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg border-orange-300 border-2">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white border-orange-300 border-2">
       <img className="w-full" src={imgSrc} alt={title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
