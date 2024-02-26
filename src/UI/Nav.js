@@ -8,7 +8,7 @@ export default function Nav() {
     <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
         <a href="#" className="flex items-center">
             {/* <img src="https://www.svgrepo.com/show/499962/music.svg" className="h-6 mr-3 sm:h-9" alt="Landwind Logo" /> */}
-            <span className="mr-10 self-center text-xl font-semibold whitespace-nowrap dark:text-white">🍜 MAZZip</span>
+            <span className="mr-10 self-center text-xl font-semibold whitespace-nowrap dark:text-white">🍜 Mat.Zip</span>
         </a>
         <div className="flex items-center lg:order-2">
             <div className="hidden mt-2 mr-4 sm:inline-block">

@@ -123,10 +123,10 @@ export default function Comment({ item }) {
                     <div className="flex justify-center items-center  h-full"><DateFormat createDate={item.createDate}/></div>
                 </div>
                 <div className="flex flex-row justify-between space-x-6 mt-2">
-                    <div className="flex justify-center items-center h-full ">
+                    <div className="flex w-3/4 h-full ">
                         {isUpdate ?
                             // 수정 가능속성
-                            <input className=" bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
+                            <input className="w-full bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
                             //  수정 불가능 속성
                             : <div>{item.cmt_content}</div>}
                     </div>

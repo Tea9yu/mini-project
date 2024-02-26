@@ -46,18 +46,13 @@ export default function BoardWrite() {
 
 
   return (
-    <div>
-
-      <div className="text-center mt-5">
+    <div className="flex flex-col justify-center items-center bg-orange-50 h-svh ">
+      <div className="text-center bg-orange-50">
         게시글 작성 페이지
       </div>
-
-
-
-      <div className="flex flex-col w-5/6 mt-10 mx-auto h-full max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
+      <div className="flex flex-col w-5/6 mt-10 mx-auto max-w-screen-sm items-center shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
         <form className="flex flex-col justify-center items-center my-5 mx-5">
           <table className="w-auto h-auto">
-
             <tbody className="flex mb-5">
               <td className="flex flex-col">작성자</td>
               <input maxLength={20} className="w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input>              
@@ -68,14 +63,11 @@ export default function BoardWrite() {
               <input maxLength={20} className="w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
               {/* <td className="flex flex-col ml-5">작성자</td>
             <input className="w-24 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input> */}
-
             </tbody>
-
             <tbody className="flex">
               <td>내용</td>
               <textarea className="h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
             </tbody>
-
             {/* 작성, 취소, 목록 버튼 */}
             <tbody className="text-center">
               <div>
@@ -86,10 +78,8 @@ export default function BoardWrite() {
                 <Link to={`/list`}><button type="button" value="목록" className="bg-orange-400 rounded-lg text-white p-2">목록</button></Link>
               </div>
             </tbody>
-
           </table>
         </form>
-
       </div>
     </div>
   )

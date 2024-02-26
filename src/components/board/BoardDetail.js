@@ -156,7 +156,7 @@ export default function BoardDetail() {
 
 
     return (
-        <div className="flex flex-col justify-center items-center mt-5 bg-orange-50 min-h-full ">
+        <div className="flex flex-col justify-center items-center bg-orange-50 h-svh ">
             <div className="mb-5 ">
                 게시판 상세 페이지
             </div>
