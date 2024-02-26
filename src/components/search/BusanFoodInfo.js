@@ -16,12 +16,12 @@ export default function BusanFoodInfo() {
   const [page, setPage] = useState(1);
   const [totalNum, setTotalNum] = useState(260);
   // 총 아이템 갯수를 동적으로 설정하기 위해 JSON 파일의 길이를 이용
-  const totalItemCount = getFoodKr.getFoodKr.item.length;
+  // const totalItemCount = getFoodKr.getFoodKr.item.length;
 
   // const [gu, setGu] = useState('');
   const [selGuData, setSelGuData] = useState('');
   const selSido = ["전체", "강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"];
-  const 전체 = getFoodKr.getFoodKr.item
+  // const 전체 = getFoodKr.getFoodKr.item
   
   // 화면 재 랜더링
   const [tags, setTags] = useState([]);
