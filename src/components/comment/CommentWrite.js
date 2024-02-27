@@ -19,6 +19,7 @@ export default function CommentWrite({ seq }) {
         // console.log("postCmtClick", postCmtClick);
         if (cmt_writer.current.value === "" || cmt_content.current.value === "" || password.current.value === "") {
             alert("닉네임, 비밀번호, 내용을 입력하세요.");
+            return; // 빈 값이 있을 경우 댓글 작성 중단
         }
 
         if (window.confirm("댓글을 작성하시겠습니까?")) {
@@ -54,10 +55,10 @@ export default function CommentWrite({ seq }) {
                         //  수정 불가능 속성
                         : <input className="flex border justify-center items-center flex-grow" ref={cmt_writer} placeholder="  닉네임" type="text" name="reple" value={reple.cmt_writer} />
                     } */}
-                    <input className="flex border justify-center items-center flex-grow" ref={cmt_writer} placeholder="  닉네임" type="text" name="reple" value={reple.cmt_writer} />
-                    <input className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="reple" value={reple.password} />
+                    <input className="outline-none flex border justify-center items-center flex-grow" ref={cmt_writer} placeholder="  닉네임" type="text" name="reple" value={reple.cmt_writer} />
+                    <input className="outline-none flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="reple" value={reple.password} />
                 </div>
-                <input className="flex border justify-center items-center flex-grow" ref={cmt_content} placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
+                <input className="outline-none flex border justify-center items-center flex-grow" ref={cmt_content} placeholder="  댓글 입력" type="text" name="reple" value={reple.cmt_content} />
                 <button className="border border-orange-900 bg-orange-400 rounded-lg text-white ml-2 px-2 py-2" type="button" onClick={postCmtClick} >작성</button>
                 
             </div>

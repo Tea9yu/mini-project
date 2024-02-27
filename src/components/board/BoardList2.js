@@ -155,7 +155,7 @@ export default function BoardList() {
                                 <td className="flex gap-2 justify-center items-center w-full h-full">
                                    
                                     {/* 검색 할 때  */}
-                                    <select className="ml-1.5" name="searchField" onChange={handleSearchFieldChange}>
+                                    <select className="outline-none ml-1.5" name="searchField" onChange={handleSearchFieldChange}>
                                         <option value="title">제목</option>
                                         <option value="content">내용</option>
                                         <option value="writer">작성자</option>
@@ -163,7 +163,7 @@ export default function BoardList() {
                                     </select>
 
                                     {/* 검색 */}
-                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className=" border-orange-300 border-solid border-4" type="text" name="searchWord"  />
+                                    <input onKeyDown={enterKeyDown} ref={searchKeyword} placeholder="검색어를 입력해주세요" className="outline-none border-orange-300 border-solid border-4" type="text" name="searchWord"  />
                                     <button onClick={boardListSearch} className="flex rounded-lg border-orange-300 border-solid" type="button" value="검색" >
                                         <div className="mt-1">
                                         <MdOutlineSearch />

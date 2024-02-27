@@ -16,7 +16,7 @@ export default function Comment({ item }) {
 
     const [isUpdate, setIsUpdate] = useState(false);
 
-    console.log("item=", item.cmt_id);
+    // console.log("item=", item.cmt_id);
 
     // 댓글 수정하기
     const handleCmtUpdate = (e) => {
@@ -65,8 +65,8 @@ export default function Comment({ item }) {
             setIsUpdate(true);
             return;
         }
-        console.log("pw",password.current.value);
-        console.log("ID",item.cmt_id);
+        // console.log("pw",password.current.value);
+        // console.log("ID",item.cmt_id);
 
         if (password && password.current.value === "") {
             alert("비밀번호를 입력해주세요");
@@ -117,7 +117,7 @@ export default function Comment({ item }) {
                     <div className="flex justify-center items-center h-full">{item.cmt_writer}</div>
                     {isUpdate ?
                         // 수정 가능속성
-                        <input className="flex border justify-center items-center flex-grow w-1/5 h-8" ref={password} placeholder="  비밀번호" type="password" name="password" />
+                        <input className="outline-none flex border justify-center items-center flex-grow w-1/5 h-8" ref={password} placeholder="  비밀번호" type="password" name="password" />
                         //  수정 불가능 속성
                         : <div>{''}</div>}
                     <div className="flex justify-center items-center  h-full"><DateFormat createDate={item.createDate}/></div>
@@ -126,7 +126,7 @@ export default function Comment({ item }) {
                     <div className="flex w-3/4 h-full ">
                         {isUpdate ?
                             // 수정 가능속성
-                            <input className="w-full bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
+                            <input className="outline-none w-full bg-orange-50 border border-b-slate-500" type="text" ref={cmt_content} name="title" defaultValue={item.cmt_content} />
                             //  수정 불가능 속성
                             : <div>{item.cmt_content}</div>}
                     </div>

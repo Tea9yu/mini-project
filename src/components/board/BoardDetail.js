@@ -28,13 +28,13 @@ export default function BoardDetail() {
     const getBoardDetail = async () => {
         const resp = await axios.get(`http://10.125.121.170:8080/board/${seq}`);  // 게시글 상세데이터 할당
         setBoardDetail(resp.data)
-        console.log("resp", resp.data)
+        // console.log("resp", resp.data)
 
     }
     const getBoardCmts = async () => {
         const cmts = await axios.get(`http://10.125.121.170:8080/board/${seq}/comments`);
         setBoardCmts(cmts.data)
-        console.log("cmt", cmts.data)
+        // console.log("cmt", cmts.data)
     }
 
     // 게시글 삭제하기
@@ -88,10 +88,10 @@ export default function BoardDetail() {
             return;
         }
 
-        console.log("value", updateTitle.current.value, updateContent.current, password.current.value)
+        // console.log("value", updateTitle.current.value, updateContent.current, password.current.value)
         // return
 
-        console.log("value", updateTitle.current.value, updateContent.current.value, updateWriter.current.value, password.current.value)
+        // console.log("value", updateTitle.current.value, updateContent.current.value, updateWriter.current.value, password.current.value)
         if (updateTitle.current.value === "" || updateContent.current.value === "" || updateWriter.current.value === "" || password.current.value === "") {
             alert("수정할 항목을 입력해주세요");
             return;
@@ -135,7 +135,7 @@ export default function BoardDetail() {
 
 
     useEffect(() => {
-        console.log("useEffect", boardDetail)
+        // console.log("useEffect", boardDetail)
 
     }, [boardDetail]);
 
@@ -145,7 +145,7 @@ export default function BoardDetail() {
     }, []);
 
     useEffect(() => {
-        console.log("boardCmts", boardCmts)
+        // console.log("boardCmts", boardCmts)
 
         let cmt = boardCmts.map((item) =>
             <Comment item={item} />
@@ -159,7 +159,7 @@ export default function BoardDetail() {
         <div className="flex flex-col justify-center items-center bg-orange-50 h-svh ">
             <div className=" ">                
             </div>
-            <div name="음영 테두리" className="flex w-5/6 mt-10 max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center">
+            <div name="음영 테두리" className="flex w-5/6 mt-10 max-w-screen-sm items-center  shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center p-2">
                 <form className="mt-10 justify-center items-center w-full">
 
                     {/* 제일 밑에 수정, 삭제, 목록 버튼 */}
@@ -190,13 +190,13 @@ export default function BoardDetail() {
                                 {/* <input className="flex justify-center items-center flex-grow bg-orange-50" ref={updateTitle} type="text" name="title" defaultValue={boardDetail.title} /> */}
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input maxLength={30} className="flex justify-center items-center flex-grow bg-orange-50" type="text" ref={updateTitle} name="title" defaultValue={boardDetail.title} />
+                                    <input maxLength={30} className="outline-none flex justify-center items-center flex-grow bg-orange-50" type="text" ref={updateTitle} name="title" defaultValue={boardDetail.title} />
                                     //  수정 불가능 속성
                                     : <div className="flex justify-center items-center flex-grow bg-orange-50">{boardDetail.title}</div>
                                 }
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input maxLength={20} className="flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
+                                    <input maxLength={20} className="outline-none flex border justify-center items-center flex-grow" ref={password} placeholder="  비밀번호" type="password" name="password" />
                                     //  수정 불가능 속성
                                     : <div>{''}</div>}
                             </div>
@@ -207,7 +207,7 @@ export default function BoardDetail() {
                             {/* <input type="text" className="border flex justify-center items-center w-20 bg-orange-50" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} /> */}
                             {isUpdate ?
                                 // 수정 가능속성
-                                <input maxLength={10} className="border flex justify-center items-center w-20 bg-orange-50" type="text" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} />
+                                <input maxLength={10} className="outline-none border flex justify-center items-center w-20 bg-orange-50" type="text" ref={updateWriter} name="writer" defaultValue={boardDetail.writer} />
                                 //  수정 불가능 속성
                                 : <div className="border flex justify-center items-center w-20 bg-orange-50" >{boardDetail.writer} </div>
                             }
@@ -222,7 +222,7 @@ export default function BoardDetail() {
                                 {/* <input className="flex justify-center items-center flex-grow bg-orange-50" ref={updateContent} type="text" name="content" defaultValue={boardDetail.content} /> */}
                                 {isUpdate ?
                                     // 수정 가능속성
-                                    <input className="flex justify-center items-center flex-grow bg-orange-50 border border-b-slate-500" type="text" ref={updateContent} name="content" defaultValue={boardDetail.content} />
+                                    <input className="outline-none flex justify-center items-center flex-grow bg-orange-50 border border-b-slate-500" type="text" ref={updateContent} name="content" defaultValue={boardDetail.content} />
                                     //  수정 불가능 속성
                                     : <div className="flex justify-center items-center flex-grow bg-orange-50" >{boardDetail.content}</div>
                                 }

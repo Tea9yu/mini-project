@@ -75,8 +75,8 @@ export default function BusanFoodInfo() {
     setTdata(jsonData);
     setTotalNum(totalLength);
 
-    console.log("data=", currentPageData);
-    console.log("length=", getFoodKr.getFoodKr.item.length);
+    // console.log("data=", currentPageData);
+    // console.log("length=", getFoodKr.getFoodKr.item.length);
 
     // // URL
     // let url = `https://apis.data.go.kr/6260000/FoodService/getFoodKr?`;
@@ -238,7 +238,7 @@ export default function BusanFoodInfo() {
             ref={foodKeyword}
             type="search"
             id="search"
-            className="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="outline-none block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search"
             required
           />

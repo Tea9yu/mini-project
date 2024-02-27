@@ -9,8 +9,8 @@ export default function TailCard({ imgSrc, title, subtitle, tags, tel, addr }) {
   // sps.push(`영업시간 : ${sps}`);
 
   sps = sps.map((item, idx) =>
-    <span key={`sp${idx}`} className="flex bg-orange-200 rounded-lg px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-      <GoClockFill className="mt-0.5" /><span className="ml-2">{item}</span>
+    <span key={`sp${idx}`} className="flex bg-orange-200 rounded-lg py-1 text-sm font-semibold text-gray-700 mb-2">
+      <GoClockFill className="ms-2 mt-1" /><span className="ps-2">{item}</span>
     </span>
   )
 
@@ -18,24 +18,26 @@ export default function TailCard({ imgSrc, title, subtitle, tags, tel, addr }) {
 
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white border-orange-300 border-2">
-      <img className="w-full" src={imgSrc} alt={title} />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">
+    <div className="max-w-sm rounded shadow-lg bg-white border-orange-300 border-2">
+      <div className="h-2/5">
+        <img className="w-full" src={imgSrc} alt={title} />
+      </div>
+      <div className="h-1/3 p-2">
+        <div className="font-bold text-xl my-1">{title}</div>
+        <p className="text-gray-700 text-sm">
           {subtitle}
         </p>
       </div>
-      <div>
-        <div className="px-6 pt-4 pb-2">
+      <div className="flex flex-col items-center">
+        <div className="py-1 w-11/12">
           {sps}
         </div>
-        <div className="flex flex-col">
-          <p className="flex ml-5 bg-orange-200 rounded-lg px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            <IoMdHome className="mt-0.5" /> <span className="ml-2">{addr}</span>
+        <div className="flex flex-col items-center w-11/12 mb-4">
+          <p className="flex w-full bg-orange-200 rounded-lg py-1 text-sm font-semibold text-gray-700 mb-2">
+            <IoMdHome className="ms-2 mt-1" /> <span className="ps-2">{addr}</span>
           </p>
-          <p className="flex ml-5 bg-orange-200 rounded-lg px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            <BsFillTelephoneFill className="mt-0.5" /><span className="flex ml-2">{tel}</span>
+          <p className="flex justify-start w-full bg-orange-200 rounded-lg py-1 text-sm font-semibold text-gray-700">
+            <BsFillTelephoneFill className="ms-2 mt-1" /><span className="ps-2">{tel}</span>
           </p>
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function BoardWrite() {
       ).then((res) => {
         alert("게시글 등록 성공");
         navigate("/list");
-        console.log(res);
+        // console.log(res);
       })
         .catch((err) => {
           console.log(err);
@@ -55,18 +55,18 @@ export default function BoardWrite() {
           <table className="w-auto h-auto">
             <tbody className="flex mb-5">
               <td className="flex flex-col">작성자</td>
-              <input maxLength={20} className="w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input>              
-              <input className="w-40 flex ml-10 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={password} type="password" placeholder="비밀번호"></input>
+              <input maxLength={20} className="outline-none w-45 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input>              
+              <input className="outline-none w-40 flex ml-10 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={password} type="password" placeholder="비밀번호"></input>
             </tbody>
             <tbody className="flex mb-5">
               <td className="flex">제목</td>
-              <input maxLength={20} className="w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
+              <input maxLength={20} className="outline-none w-96 ml-5 items-center relative overflow-x-auto max-w-lg shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" type="text" ref={title} placeholder="제목을 입력해주세요" />
               {/* <td className="flex flex-col ml-5">작성자</td>
             <input className="w-24 flex ml-1 items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={writer} placeholder="닉네임"></input> */}
             </tbody>
             <tbody className="flex">
               <td>내용</td>
-              <textarea className="h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
+              <textarea className="outline-none h-80 w-96 mb-5 ml-5 flex items-center relative overflow-x-auto shadow-md sm:rounded-lg bg-orange-50 border-2 border-orange-200 justify-center" ref={content} placeholder="내용을 입력해주세요"></textarea>
             </tbody>
             {/* 작성, 취소, 목록 버튼 */}
             <tbody className="text-center">
